@@ -89,8 +89,11 @@
 
         .hero-image {
             width: 100%;
-            height: 50vh;
-            background-color: var(--navy);
+            height: 100vh;
+            background-image: url('https://raw.githubusercontent.com/HomesiteZip/MHE2025/refs/heads/main/poster.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -196,7 +199,7 @@
         /* 모바일 세로 화면 최적화 */
         @media (max-width: 480px) and (orientation: portrait) {
             .hero-image {
-                height: 45vh;
+                height: 100vh;
             }
             
             .content {
@@ -222,32 +225,32 @@
     <!-- 메인 콘텐츠 -->
     <div class="main-content" id="mainContent">
         <div class="container">
-        <!-- 히어로 이미지 섹션 -->
-        <div class="hero-image">
-        </div>
-
-        <!-- 메인 콘텐츠 -->
-        <div class="content">
-            <div>
-                <h1 class="title">Musical MAYBE HAPPY ENDING</h1>
-                <p class="title-description">
-                    특별한 뮤지컬 공연을 경험해보세요.<br>
-                    감동과 즐거움이 가득한 무대를 선사합니다.
-                </p>
+            <!-- 히어로 이미지 섹션 -->
+            <div class="hero-image">
             </div>
 
-            <div class="button-group">
-                <a href="https://google.com" class="btn" target="_blank">티켓 예매하기</a>
-                <a href="https://google.com" class="btn" target="_blank">공연 정보 보기</a>
-                <a href="https://google.com" class="btn" target="_blank">출연진 소개</a>
+            <!-- 메인 콘텐츠 -->
+            <div class="content">
+                <div>
+                    <h1 class="title">Musical MAYBE HAPPY ENDING</h1>
+                    <p class="title-description">
+                        특별한 뮤지컬 공연을 경험해보세요.<br>
+                        감동과 즐거움이 가득한 무대를 선사합니다.
+                    </p>
+                </div>
+
+                <div class="button-group">
+                    <a href="https://google.com" class="btn" target="_blank">티켓 예매하기</a>
+                    <a href="https://google.com" class="btn" target="_blank">공연 정보 보기</a>
+                    <a href="https://google.com" class="btn" target="_blank">출연진 소개</a>
+                </div>
+            </div>
+
+            <!-- 푸터 -->
+            <div class="footer">
+                2025 Musical MAYBE HAPPY ENDING
             </div>
         </div>
-
-        <!-- 푸터 -->
-        <div class="footer">
-            2025 Musical MAYBE HAPPY ENDING
-        </div>
-    </div>
     </div>
 
     <script>
