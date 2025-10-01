@@ -97,6 +97,37 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .download-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .hero-image:active .download-hint {
+            opacity: 1;
         }
 
         .content {
@@ -199,7 +230,7 @@
         /* 모바일 세로 화면 최적화 */
         @media (max-width: 480px) and (orientation: portrait) {
             .hero-image {
-                height: 100vh;
+                height: 45vh;
             }
             
             .content {
@@ -225,32 +256,33 @@
     <!-- 메인 콘텐츠 -->
     <div class="main-content" id="mainContent">
         <div class="container">
-            <!-- 히어로 이미지 섹션 -->
-            <div class="hero-image">
+        <!-- 히어로 이미지 섹션 -->
+        <div class="hero-image" id="heroImage">
+            <div class="download-hint">꾹 눌러서 이미지 저장</div>
+        </div>
+
+        <!-- 메인 콘텐츠 -->
+        <div class="content">
+            <div>
+                <h1 class="title">Musical MAYBE HAPPY ENDING</h1>
+                <p class="title-description">
+                    특별한 뮤지컬 공연을 경험해보세요.<br>
+                    감동과 즐거움이 가득한 무대를 선사합니다.
+                </p>
             </div>
 
-            <!-- 메인 콘텐츠 -->
-            <div class="content">
-                <div>
-                    <h1 class="title">Musical MAYBE HAPPY ENDING</h1>
-                    <p class="title-description">
-                        특별한 뮤지컬 공연을 경험해보세요.<br>
-                        감동과 즐거움이 가득한 무대를 선사합니다.
-                    </p>
-                </div>
-
-                <div class="button-group">
-                    <a href="https://google.com" class="btn" target="_blank">티켓 예매하기</a>
-                    <a href="https://google.com" class="btn" target="_blank">공연 정보 보기</a>
-                    <a href="https://google.com" class="btn" target="_blank">출연진 소개</a>
-                </div>
-            </div>
-
-            <!-- 푸터 -->
-            <div class="footer">
-                2025 Musical MAYBE HAPPY ENDING
+            <div class="button-group">
+                <a href="https://google.com" class="btn" target="_blank">티켓 예매하기</a>
+                <a href="https://google.com" class="btn" target="_blank">공연 정보 보기</a>
+                <a href="https://google.com" class="btn" target="_blank">출연진 소개</a>
             </div>
         </div>
+
+        <!-- 푸터 -->
+        <div class="footer">
+            2025 Musical MAYBE HAPPY ENDING
+        </div>
+    </div>
     </div>
 
     <script>
@@ -268,6 +300,40 @@
             }, 500);
             
         }, 2000);
+
+        // 히어로 이미지 길게 눌러서 다운로드
+        const heroImage = document.getElementById('heroImage');
+        let longPressTimer;
+
+        heroImage.addEventListener('touchstart', (e) => {
+            longPressTimer = setTimeout(() => {
+                downloadImage();
+            }, 800);
+        });
+
+        heroImage.addEventListener('touchend', () => {
+            clearTimeout(longPressTimer);
+        });
+
+        heroImage.addEventListener('touchmove', () => {
+            clearTimeout(longPressTimer);
+        });
+
+        // PC에서 클릭으로도 다운로드
+        heroImage.addEventListener('click', () => {
+            downloadImage();
+        });
+
+        function downloadImage() {
+            const imageUrl = 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/refs/heads/main/poster.jpg';
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = 'MAYBE_HAPPY_ENDING_Poster.jpg';
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     </script>
 </body>
 </html>
