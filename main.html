@@ -282,26 +282,6 @@
       type: 'text',
       buttons: ['김재범', '신성민', '전성우', '정휘'],
       buttonsPhotos: [
-        ['https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80',
-         'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
-         'https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'],
-        ['https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
-         'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
-         'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80'],
-        ['https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
-         'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
-         'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80'],
-        ['https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
-         'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
-         'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80'],
-      ]
-    },
-    {
-      name: 'Claire',
-      emoji: '😄',
-      type: 'text',
-      buttons: ['전미도', '최수진', '박지연', '박진주', '방민아'],
-      buttonsPhotos: [
         [
           'https://github.com/HomesiteZip/MHE2025/blob/main/%E1%84%89%E1%85%A6%E1%86%AF%E1%84%8F%E1%85%A1_%E1%84%80%E1%85%B5%E1%86%B7%E1%84%8C%E1%85%A2%E1%84%87%E1%85%A5%E1%86%B7_1.jpg?raw=true',
           'https://github.com/HomesiteZip/MHE2025/blob/main/%E1%84%89%E1%85%A6%E1%86%AF%E1%84%8F%E1%85%A1_%E1%84%80%E1%85%B5%E1%86%B7%E1%84%8C%E1%85%A2%E1%84%87%E1%85%A5%E1%86%B7_2.jpg?raw=true',
@@ -325,6 +305,29 @@
       ]
     },
     {
+      name: 'Claire',
+      emoji: '😄',
+      type: 'text',
+      buttons: ['전미도', '최수진', '박지연', '박진주', '방민아'],
+      buttonsPhotos: [
+        ['https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
+         'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+         'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
+         'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
+         'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+         'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80',
+         'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+         'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80',
+         'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+         'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80',
+         'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80'],
+      ],
+    },
+    {
       name: 'James',
       emoji: '🙂',
       type: 'text',
@@ -343,62 +346,69 @@
     },
   ];
 
-  let activeTab = 'home';
-  let selectedPhotos = null;
-  let currentPhotoIndex = 0;
-  let clickDisabled = false;
+let activeTab = 'home';
+let selectedPhotos = null;
+let currentPhotoIndex = 0;
+let clickDisabled = false;
 
-  function render() {
-    Object.values(tabButtons).forEach(button => button.classList.remove('active'));
-    tabButtons[activeTab].classList.add('active');
+function render() {
+  Object.values(tabButtons).forEach(button => button.classList.remove('active'));
+  tabButtons[activeTab].classList.add('active');
 
-    mainContent.innerHTML = '';
+  mainContent.innerHTML = '';
 
-    if (activeTab === 'home') {
+  if (activeTab === 'home') {
+    const div = document.createElement('div');
+    div.className = 'tab-home';
+    mainContent.appendChild(div);
+  } else if (activeTab === 'photos') {
+    ['Oliver', 'Claire', 'James'].forEach((name, i, arr) => {
+      const person = photoData.find(p => p.name === name);
+      if (!person) return;
+
       const div = document.createElement('div');
-      div.className = 'tab-home';
+      div.className = 'person ' + name.toLowerCase();
+
+      if (name === 'Oliver') div.style.marginTop = '50px';
+
+      const header = document.createElement('div');
+      header.className = 'person-header center';
+      header.innerHTML = `<span class="emoji">${person.emoji}</span><span>${person.name}</span>`;
+      div.appendChild(header);
+
+      const buttonsDiv = document.createElement('div');
+      buttonsDiv.className = 'buttons center';
+
+      if (name === 'Claire') {
+        person.buttons.slice(0, 3).forEach((btnText, idx) => {
+          const btn = createPhotoButton(btnText, person.buttonsPhotos[idx]);
+          buttonsDiv.appendChild(btn);
+        });
+        const brNode = document.createElement('div');
+        brNode.style.flexBasis = '100%';
+        buttonsDiv.appendChild(brNode);
+        person.buttons.slice(3).forEach((btnText, idx) => {
+          const btn = createPhotoButton(btnText, person.buttonsPhotos[3 + idx]);
+          buttonsDiv.appendChild(btn);
+        });
+      } else {
+        person.buttons.forEach((btnText, idx) => {
+          const btn = createPhotoButton(btnText, person.buttonsPhotos[idx]);
+          buttonsDiv.appendChild(btn);
+        });
+      }
+
+      div.appendChild(buttonsDiv);
+
+      // group-divider를 buttons 뒤에 추가, 단 James(마지막 그룹) 제외
+      if (name !== arr[arr.length - 1]) {
+        const divider = document.createElement('div');
+        divider.className = 'group-divider';
+        div.appendChild(divider);
+      }
+
       mainContent.appendChild(div);
-    } else if (activeTab === 'photos') {
-      ['Oliver', 'Claire', 'James'].forEach((name, i, arr) => {
-        const person = photoData.find(p => p.name === name);
-        if (!person) return;
-
-        const div = document.createElement('div');
-        div.className = 'person ' + name.toLowerCase();
-
-        if (name === 'Oliver') div.style.marginTop = '50px';
-
-        const header = document.createElement('div');
-        header.className = 'person-header center';
-        header.innerHTML = `<span class="emoji">${person.emoji}</span><span>${person.name}</span>`;
-        div.appendChild(header);
-
-        if (name !== arr[arr.length - 1]) {
-          const divider = document.createElement('div');
-          divider.className = 'group-divider';
-          div.appendChild(divider);
-        }
-
-        const buttonsDiv = document.createElement('div');
-        buttonsDiv.className = 'buttons center';
-
-        if (name === 'Claire') {
-          person.buttons.slice(0, 3).forEach((btnText, idx) => {
-            const btn = createPhotoButton(btnText, person.buttonsPhotos[idx]);
-            buttonsDiv.appendChild(btn);
-          });
-          const brNode = document.createElement('div');
-          brNode.style.flexBasis = '100%';
-          buttonsDiv.appendChild(brNode);
-          person.buttons.slice(3).forEach((btnText, idx) => {
-            const btn = createPhotoButton(btnText, person.buttonsPhotos[3 + idx]);
-            buttonsDiv.appendChild(btn);
-          });
-        } else {
-          person.buttons.forEach((btnText, idx) => {
-            const btn = createPhotoButton(btnText, person.buttonsPhotos[idx]);
-            buttonsDiv.appendChild(btn);
-          });
+    });
         }
 
         div.appendChild(buttonsDiv);
