@@ -456,7 +456,6 @@
     galleryCounter.textContent = `${currentPhotoIndex + 1} / ${selectedPhotos.length}`;
   }
 
-  let clickDisabled = false;
   function nextPhoto() {
     if (clickDisabled || !selectedPhotos) return;
     clickDisabled = true;
