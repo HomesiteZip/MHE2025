@@ -93,16 +93,14 @@
     background-color: #001FE9;
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
     padding: 6px 12px;
     font-weight: 500;
     font-size: 0.875rem;
     cursor: pointer;
     transition: transform 0.2s ease;
   }
-  button.photo-btn:hover {
-    transform: scale(1.05);
-  }
+
   /* Gallery Overlay */
   #gallery-overlay {
     display: none;
@@ -262,12 +260,12 @@
         personDiv.className = 'person';
 
         const header = document.createElement('div');
-        header.className = 'person-header ' + (person.align || 'center');
+        header.className = 'person-header center';
         header.innerHTML = `<span class="emoji">${person.emoji}</span><span>${person.name}</span>`;
         personDiv.appendChild(header);
 
         const buttonsDiv = document.createElement('div');
-        buttonsDiv.className = 'buttons ' + (person.align || 'center');
+        buttonsDiv.className = 'buttons center';
 
         if (person.type === 'text') {
           person.buttons.forEach(btnText => {
@@ -282,8 +280,7 @@
           person.rows.forEach(row => {
             const rowDiv = document.createElement('div');
             rowDiv.style.display = 'flex';
-            rowDiv.style.justifyContent = person.align === 'left' ? 'flex-start' :
-                                        person.align === 'right' ? 'flex-end' : 'center';
+            rowDiv.style.justifyContent = 'center'; 
             rowDiv.style.gap = '10px';
             row.forEach(() => {
               const iconBtn = document.createElement('button');
