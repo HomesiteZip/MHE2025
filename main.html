@@ -7,7 +7,7 @@
 <style>
   body, html {
     margin: 0; padding: 0; height: 100%;
-    background-color: #FFF2DA;
+    background-color: #fadbdf;
     font-family: Arial, sans-serif;
   }
   #app {
@@ -26,13 +26,13 @@
     color: #001FE9;
     padding: 12px 0;
     border-bottom: 2px solid #001FE9;
-    background-color: #FFF2DA;
+    background-color: #fadbdf;
   }
   main {
     flex: 1;
     overflow-y: auto;
     padding: 12px;
-    background-color: #FFF2DA;
+    background-color: #fadbdf;
     position: relative;
   }
   nav {
@@ -45,7 +45,7 @@
     border: none;
     cursor: pointer;
     font-size: 1rem;
-    background-color: #FFF2DA;
+    background-color: #fadbdf;
     color: #001FE9;
     transition: background-color 0.3s, color 0.3s;
     border-right: 2px solid #001FE9;
@@ -64,9 +64,22 @@
     background-position: center;
   }
   .person {
-    margin-bottom: 24px;
     max-width: 100%;
   }
+  /* 올리버만 상단 100px 여백 */
+  .person.oliver {
+    margin-top: 100px;
+    margin-bottom: 70px;
+  }
+  /* 클레어, 제임스 사이 70px 여백 */
+  .person.not-first {
+    margin-bottom: 70px;
+  }
+  /* 기본 없애고 나머지 사람 */
+  .person:not(.oliver):not(:last-child) {
+    margin-bottom: 70px;
+  }
+  /* 가운데 정렬과 기본 스타일 */
   .person-header {
     display: flex;
     align-items: center;
@@ -99,6 +112,18 @@
   button.photo-btn:hover {
     transform: scale(1.05);
   }
+  /* 가운데 2px 파란 라인 */
+  .divider {
+    height: 2px;
+    background-color: #001FE9;
+    margin: 0 20px 40px 20px;
+  }
+  /* 줄바꿈을 위한 클래스 */
+  .break-after {
+    display: block;
+    margin-right: 10px;
+  }
+
   /* Gallery Overlay */
   #gallery-overlay {
     display: none;
@@ -134,16 +159,19 @@
   #gallery-close {
     top: 20px;
     right: 20px;
+    z-index: 1010;
   }
   #gallery-prev {
     top: 50%;
     left: 20px;
     transform: translateY(-50%);
+    z-index: 1010;
   }
   #gallery-next {
     top: 50%;
     right: 20px;
     transform: translateY(-50%);
+    z-index: 1010;
   }
   #gallery-counter {
     text-align: center;
@@ -157,7 +185,7 @@
 <div id="app">
   <header>MAYBE HAPPY ENDING</header>
   <main id="main-content">
-    <!-- 내용은 JS로 채움 -->
+    <!-- 내용 삽입 JS -->
   </main>
   <nav>
     <button id="tab-home-btn" class="active">홈</button>
@@ -180,7 +208,6 @@
 </div>
 
 <script>
-  // 데이터: 모든 person 타입 'text'로 바꾸고 버튼 텍스트 수정
   const photoData = [
     { 
       name: 'Oliver',
@@ -202,11 +229,11 @@
       type: 'text',
       buttons: ['전미도', '최수진', '박지연', '박진주', '방민아'],
       buttonsPhotos: [
-        ['https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80'], // 전미도
-        ['https://images.unsplash.com/photo-1518893063132-36e46dbe2428?w=800&q=80'], // 최수진
-        ['https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'], // 박지연
-        ['https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80'], // 박진주
-        ['https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80']  // 방민아
+        ['https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1518893063132-36e46dbe2428?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80']
       ]
     },
     { 
@@ -216,9 +243,9 @@
       type: 'text',
       buttons: ['이시안', '고훈정', '박세훈'],
       buttonsPhotos: [
-        ['https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80'], // 이시안
-        ['https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80'], // 고훈정
-        ['https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80']  // 박세훈
+        ['https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80']
       ]
     }
   ];
@@ -228,7 +255,6 @@
   let currentPhotoIndex = 0;
 
   const mainContent = document.getElementById('main-content');
-
   const tabButtons = {
     home: document.getElementById('tab-home-btn'),
     photos: document.getElementById('tab-photos-btn'),
@@ -250,14 +276,32 @@
       mainContent.appendChild(homeDiv);
     }
     else if (activeTab === 'photos') {
-      photoData.forEach(person => {
+      photoData.forEach((person, idx) => {
         const personDiv = document.createElement('div');
         personDiv.className = 'person';
+        if (person.name === 'Oliver') {
+          personDiv.classList.add('oliver');
+        } else {
+          personDiv.classList.add('not-first');
+        }
 
         const header = document.createElement('div');
         header.className = 'person-header center';
         header.innerHTML = `<span class="emoji">${person.emoji}</span><span>${person.name}</span>`;
         personDiv.appendChild(header);
+
+        // 중간에 파란색 선 추가 (Oliver 다음에)
+        if (person.name === 'Oliver') {
+          const divider = document.createElement('div');
+          divider.className = 'divider';
+          personDiv.appendChild(divider);
+        }
+        // 그리고 Claire 다음에도 선 추가
+        if (person.name === 'Claire') {
+          const divider = document.createElement('div');
+          divider.className = 'divider';
+          personDiv.appendChild(divider);
+        }
 
         const buttonsDiv = document.createElement('div');
         buttonsDiv.className = 'buttons center';
@@ -265,6 +309,17 @@
         person.buttons.forEach((btnText, btnIndex) => {
           const btn = document.createElement('button');
           btn.className = 'photo-btn';
+
+          // 박지연에서 줄바꿈, 박진주, 방민아는 다음 줄에 같이 있도록 처리 (Claire에만 적용)
+          if (person.name === 'Claire') {
+            if (btnText === '박지연') {
+              btn.classList.add('break-after');
+            }
+            if (btnText === '박진주') {
+              btn.style.marginRight = '10px';
+            }
+          }
+
           btn.textContent = btnText;
           btn.addEventListener('click', () => openGallery(person.buttonsPhotos[btnIndex]));
           buttonsDiv.appendChild(btn);
