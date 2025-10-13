@@ -190,17 +190,19 @@
       align: 'center',
       type: 'text',
       buttons: ['김재범', '신성민', '전성우', '정휘'],
-      photos: [
-        'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80',
-        'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
-        'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80'
-      ]
-    },
+      buttonsPhotos: [
+      ['https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80', 'https://images.unsplash.com/photo-1518893063132-36e46dbe2428?w=800&q=80'],   // 김재범 사진들
+      ['https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80', 'https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'],   // 신성민 사진들
+      ['https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'],                 // 전성우 사진들
+      ['https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'] // 정휘 사진들
+    ],
+    buttons: ['김재범', '신성민', '전성우', '정휘']
+  },
     { 
       name: 'Claire',
       emoji: '😄',
       align: 'center',
-      type: 'icon',
+      type: 'text',
       rows: ['전미도', '최수진', '박지연', '박진주', '방민아'],
       photos: [
         'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
@@ -212,7 +214,7 @@
       name: 'James',
       emoji: '🙂',
       align: 'center',
-      type: 'icon',
+      type: 'text',
       rows: ['이시안', '고훈정', '박세훈'],
       photos: [
         'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
@@ -272,7 +274,7 @@
             const btn = document.createElement('button');
             btn.className = 'photo-btn';
             btn.textContent = btnText;
-            btn.addEventListener('click', () => openGallery(person.photos));
+            btn.addEventListener('click', () => openGallery(person.buttonsPhotos[btnIndex]));
             buttonsDiv.appendChild(btn);
           });
         }
