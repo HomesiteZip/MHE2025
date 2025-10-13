@@ -5,232 +5,82 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>Mobile Event App</title>
 <style>
-  body, html {
-    margin: 0; padding: 0; height: 100%;
-    background-color: #fadbdf;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-  }
+  body, html { margin: 0; padding: 0; height: 100%; background-color: #fadbdf; font-family: Arial, sans-serif; overflow: hidden; }
   #app {
-    max-width: 360px;
-    margin: 0 auto;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    border-left: 2px solid #001FE9;
-    border-right: 2px solid #001FE9;
-    box-sizing: border-box;
-    position: relative;
+    max-width: 360px; margin: 0 auto; height: 100vh; display: flex; flex-direction: column;
+    border-left: 2px solid #001FE9; border-right: 2px solid #001FE9; box-sizing: border-box; position: relative;
   }
   header {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.25rem;
-    color: #001FE9;
-    padding: 12px 0;
-    border-bottom: 2px solid #001FE9;
-    background-color: #fadbdf;
-    flex-shrink: 0;
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 360px;
-    z-index: 10;
+    text-align: center; font-weight: bold; font-size: 1.25rem; color: #001FE9; padding: 12px 0;
+    border-bottom: 2px solid #001FE9; background-color: #fadbdf; flex-shrink: 0; position: fixed;
+    top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 360px; z-index: 10;
   }
   main {
-    flex-grow: 1;
-    overflow-y: auto;
-    background-color: #fadbdf;
-    padding: 0; /* 여백 없앰 */
-    margin-top: 56px;
-    margin-bottom: 56px;
+    flex-grow: 1; overflow-y: auto; background-color: #fadbdf; padding: 0; margin-top: 56px; margin-bottom: 56px;
   }
   nav {
-    display: flex;
-    border-top: 2px solid #001FE9;
-    background-color: #fadbdf;
-    flex-shrink: 0;
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 360px;
-    height: 60px; /* 높이 60px */
-    z-index: 10;
+    display: flex; border-top: 2px solid #001FE9; background-color: #fadbdf; flex-shrink: 0; position: fixed;
+    bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 360px; height: 60px; z-index: 10;
   }
   nav button {
-    flex: 1;
-    padding: 0;
-    border: none;
-    cursor: pointer;
-    background-color: #fadbdf;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 100%;
-    box-sizing: border-box;
-    font-size: 1.25rem;
-    color: #001FE9;
+    flex: 1; padding: 0; border: none; cursor: pointer; background-color: #fadbdf; display: flex; justify-content: center;
+    align-items: center; position: relative; height: 100%; box-sizing: border-box; font-size: 1.25rem; color: #001FE9;
     transition: background-color 0.3s, color 0.3s;
   }
-  nav button.active {
-    background-color: #001FE9;
-    color: #FFF2DA;
-  }
-  /* 버튼 세로선 상하 꽉 채움 */
+  nav button.active { background-color: #001FE9; color: #FFF2DA; }
   nav button:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 2px;
-    background-color: #001FE9;
-  }
-  /* 홈 버튼 왼쪽 세로선 */
+    content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 2px; background-color: #001FE9; }
   #tab-home-btn::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 2px;
-    background-color: #001FE9;
-  }
-  /* 정보 버튼 오른쪽 세로선 */
+    content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 2px; background-color: #001FE9; }
   #tab-info-btn::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 2px;
-    background-color: #001FE9;
-  }
+    content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 2px; background-color: #001FE9; }
 
   .tab-home {
-    width: 100%;
-    height: 100%;
-    background-image: url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=1200&q=80');
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-    padding: 0;
+    width: 100%; height: 100%; background-image: url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=1200&q=80');
+    background-size: cover; background-position: center; margin: 0; padding: 0;
   }
   .person {
-    max-width: 100%;
-    padding: 0 12px;
-    box-sizing: border-box;
+    max-width: 100%; padding: 0 12px; box-sizing: border-box;
   }
-  /* Oliver a그룹 상단 여백 절반 */
-  .person.oliver {
-    margin-top: 50px;
-    margin-bottom: 70px;
-  }
-  .person.claire {
-    margin-bottom: 70px;
-  }
-  .person.james {
-    margin-bottom: 0;
-  }
+  .person.oliver { margin-top: 50px; margin-bottom: 70px; }
+  .person.claire { margin-bottom: 70px; }
+  .person.james { margin-bottom: 0; }
   .person-header {
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    font-size: 1.25rem;
-    color: #001FE9;
-    margin-bottom: 8px;
-    gap: 6px;
-    justify-content: center;
+    display: flex; align-items: center; font-weight: bold; font-size: 1.25rem;
+    color: #001FE9; margin-bottom: 8px; gap: 6px; justify-content: center;
   }
   .emoji { font-size: 2rem; }
   .buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
   }
   button.photo-btn {
-    min-width: 70px;
-    background-color: #001FE9;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 6px 12px;
-    font-weight: 500;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+    min-width: 70px; background-color: #001FE9; color: white; border: none;
+    border-radius: 10px; padding: 6px 12px; font-weight: 500; font-size: 0.875rem;
+    cursor: pointer; transition: transform 0.2s ease;
   }
-  button.photo-btn:hover {
-    transform: scale(1.05);
-  }
-  /* a,b, c 그룹 사이 가로 라인 */
-  .group-divider {
-    height: 2px;
-    background-color: #001FE9;
-    margin: 0 20px 40px 20px;
-  }
+  button.photo-btn:hover { transform: scale(1.05); }
 
+  .group-divider {
+    height: 2px; background-color: #001FE9; margin: 0 20px 40px 20px;
+  }
   #gallery-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    touch-action: pan-y;
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+    justify-content: center; align-items: center; z-index: 1000; touch-action: pan-y;
   }
   #gallery-content {
-    position: relative;
-    max-width: 90%;
-    max-height: 80%;
+    position: relative; max-width: 90%; max-height: 80%;
   }
   #gallery-content img {
-    width: 100%;
-    max-height: 80vh;
-    border-radius: 10px;
-    user-select: none;
+    width: 100%; max-height: 80vh; border-radius: 10px; user-select: none;
   }
-  #gallery-close,
-  #gallery-prev,
-  #gallery-next {
-    position: fixed;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 3rem;
-    cursor: pointer;
-    user-select: none;
+  #gallery-close, #gallery-prev, #gallery-next {
+    position: fixed; background: none; border: none; color: white;
+    font-size: 3rem; cursor: pointer; user-select: none;
   }
-  #gallery-close {
-    top: 20px;
-    right: 20px;
-    z-index: 1010;
-  }
-  #gallery-prev {
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-    z-index: 1010;
-  }
-  #gallery-next {
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    z-index: 1010;
-  }
-  #gallery-counter {
-    text-align: center;
-    color: #FFF2DA;
-    margin-top: 8px;
-    font-size: 1rem;
-  }
+  #gallery-close { top: 20px; right: 20px; z-index: 1010; }
+  #gallery-prev { top: 50%; left: 20px; transform: translateY(-50%); z-index: 1010; }
+  #gallery-next { top: 50%; right: 20px; transform: translateY(-50%); z-index: 1010; }
+  #gallery-counter { text-align: center; color: #FFF2DA; margin-top: 8px; font-size: 1rem; }
 </style>
 </head>
 <body>
@@ -239,19 +89,19 @@
   <main id="main-content"></main>
   <nav>
     <button id="tab-home-btn" class="active" aria-label="홈">
-      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
     </button>
     <button id="tab-photos-btn" aria-label="사진">
-      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM7 9l2.5 3.01L12.5 9l4.5 6H5l2-3z"/></svg>
+      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM7 9l2.5 3.01L12.5 9l4.5 6H5l2-3z"/></svg>
     </button>
     <button id="tab-music-btn" aria-label="음악">
-      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
     </button>
     <button id="tab-sheet-btn" aria-label="악보">
-      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM7 17l5-5-5-5v10z"/></svg>
+      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM7 17l5-5-5-5v10z"/></svg>
     </button>
     <button id="tab-info-btn" aria-label="정보">
-      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg>
+      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg>
     </button>
   </nav>
 </div>
@@ -267,55 +117,12 @@
 </div>
 
 <script>
-  const photoData = [
-    { 
-      name: 'Oliver',
-      emoji: '😊',
-      align: 'center',
-      type: 'text',
-      buttons: ['김재범', '신성민', '전성우', '정휘'],
-      buttonsPhotos: [
-        Array(3).fill('https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80'),
-        Array(3).fill('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80'),
-        Array(3).fill('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80'),
-        Array(3).fill('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80')
-      ]
-    },
-    { 
-      name: 'Claire',
-      emoji: '😄',
-      align: 'center',
-      type: 'text',
-      buttons: ['전미도', '최수진', '박지연', '박진주', '방민아'],
-      buttonsPhotos: [
-        Array(3).fill('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80'),
-        Array(3).fill('https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80'),
-        Array(3).fill('https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'),
-        Array(3).fill('https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80'),
-        Array(3).fill('https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80')
-      ]
-    },
-    { 
-      name: 'James',
-      emoji: '🙂',
-      align: 'center',
-      type: 'text',
-      buttons: ['이시안', '고훈정', '박세훈'],
-      buttonsPhotos: [
-        Array(3).fill('https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80'),
-        Array(3).fill('https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80'),
-        Array(3).fill('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80')
-      ]
-    }
-  ];
-
-  let activeTab = 'home';
-  let selectedPhotos = null;
-  let currentPhotoIndex = 0;
-
+  // 미리 필요한 DOM 모두 얻기
+  const app = document.getElementById('app');
   const mainContent = document.getElementById('main-content');
   const galleryOverlay = document.getElementById('gallery-overlay');
-
+  const galleryImg = document.getElementById('gallery-img');
+  const galleryCounter = document.getElementById('gallery-counter');
   const tabButtons = {
     home: document.getElementById('tab-home-btn'),
     photos: document.getElementById('tab-photos-btn'),
@@ -323,126 +130,225 @@
     sheet: document.getElementById('tab-sheet-btn'),
     info: document.getElementById('tab-info-btn')
   };
+  const galleryCloseBtn = document.getElementById('gallery-close');
+  const galleryPrevBtn = document.getElementById('gallery-prev');
+  const galleryNextBtn = document.getElementById('gallery-next');
+
+  // 데이터 및 상태
+  const photoData = [
+    { 
+      name: 'Oliver',
+      emoji: '😊',
+      type: 'text',
+      buttons: ['김재범', '신성민', '전성우', '정휘'],
+      buttonsPhotos: [
+        [
+          'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80',
+          'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
+          'https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'
+        ],
+        [
+          'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
+          'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
+          'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80'
+        ],
+        [
+          'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+          'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
+          'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80'
+        ],
+        [
+          'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
+          'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
+          'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80'
+        ]
+      ]
+    },
+    { 
+      name: 'Claire',
+      emoji: '😄',
+      type: 'text',
+      buttons: ['전미도', '최수진', '박지연', '박진주', '방민아'],
+      buttonsPhotos: [
+        [
+          'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
+          'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+          'https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'
+        ],
+        [
+          'https://images.unsplash.com/photo-1518893063132-36e46dbe2428?w=800&q=80',
+          'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
+          'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80'
+        ],
+        [
+          'https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80',
+          'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+          'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80'
+        ],
+        [
+          'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
+          'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
+          'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80'
+        ],
+        [
+          'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+          'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
+          'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80'
+        ]
+      ]
+    },
+    { 
+      name: 'James',
+      emoji: '🙂',
+      type: 'text',
+      buttons: ['이시안', '고훈정', '박세훈'],
+      buttonsPhotos: [
+        [
+          'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
+          'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+          'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80'
+        ],
+        [
+          'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
+          'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
+          'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80'
+        ],
+        [
+          'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+          'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80',
+          'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80'
+        ]
+      ]
+    }
+  ];
+
+  let activeTab = 'home';
+  let selectedPhotos = null;
+  let currentPhotoIndex = 0;
+  let startX = 0, endX =0;
 
   function render() {
-    Object.keys(tabButtons).forEach(key => {
-      tabButtons[key].classList.toggle('active', key === activeTab);
-    });
-
+    Object.values(tabButtons).forEach(btn => btn.classList.remove('active'));
+    tabButtons[activeTab].classList.add('active');
     mainContent.innerHTML = '';
 
     if (activeTab === 'home') {
-      const homeDiv = document.createElement('div');
-      homeDiv.className = 'tab-home';
-      mainContent.appendChild(homeDiv);
-    }
-    else if (activeTab === 'photos') {
-      // a그룹 Oliver
-      const oliver = photoData.find(p => p.name === 'Oliver');
-      const oliverDiv = createPersonGroup(oliver, true);
-      mainContent.appendChild(oliverDiv);
-      addGroupDivider(mainContent);
+      const div = document.createElement('div');
+      div.className = 'tab-home';
+      mainContent.appendChild(div);
+    } else if (activeTab === 'photos') {
+      ['Oliver', 'Claire', 'James'].forEach(name => {
+        const person = photoData.find(p => p.name === name);
+        if (!person) return;
 
-      // b그룹 Claire
-      const claire = photoData.find(p => p.name === 'Claire');
-      const claireDiv = createPersonGroup(claire, false);
-      mainContent.appendChild(claireDiv);
-      addGroupDivider(mainContent);
+        const div = document.createElement('div');
+        div.className = 'person ' + name.toLowerCase();
 
-      // c그룹 James
-      const james = photoData.find(p => p.name === 'James');
-      const jamesDiv = createPersonGroup(james, false);
-      mainContent.appendChild(jamesDiv);
-    }
-    else if (activeTab === 'music') {
+        const header = document.createElement('div');
+        header.className = 'person-header center';
+        header.innerHTML = `<span class="emoji">${person.emoji}</span><span>${person.name}</span>`;
+        div.appendChild(header);
+
+        if (name !== 'James') {
+          const divider = document.createElement('div');
+          divider.className = 'group-divider';
+          div.appendChild(divider);
+        }
+
+        const buttonsDiv = document.createElement('div');
+        buttonsDiv.className = 'buttons center';
+
+        if (name === 'Claire') {
+          person.buttons.slice(0,3).forEach((btnText, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'photo-btn';
+            btn.textContent = btnText;
+            btn.addEventListener('click', () => openGallery(person.buttonsPhotos[idx]));
+            buttonsDiv.appendChild(btn);
+          });
+          const brNode = document.createElement('div');
+          brNode.style.flexBasis = '100%';
+          buttonsDiv.appendChild(brNode);
+          person.buttons.slice(3).forEach((btnText, idx) => {
+            const actualIdx = idx + 3;
+            const btn = document.createElement('button');
+            btn.className = 'photo-btn';
+            btn.textContent = btnText;
+            btn.addEventListener('click', () => openGallery(person.buttonsPhotos[actualIdx]));
+            buttonsDiv.appendChild(btn);
+          });
+        } else {
+          person.buttons.forEach((btnText, btnIndex) => {
+            const btn = document.createElement('button');
+            btn.className = 'photo-btn';
+            btn.textContent = btnText;
+            btn.addEventListener('click', () => openGallery(person.buttonsPhotos[btnIndex]));
+            buttonsDiv.appendChild(btn);
+          });
+        }
+
+        div.appendChild(buttonsDiv);
+        mainContent.appendChild(div);
+      });
+    } else if (activeTab === 'music') {
       const musicDiv = document.createElement('div');
       musicDiv.style.height = '100%';
       musicDiv.style.display = 'flex';
       musicDiv.style.alignItems = 'center';
       musicDiv.style.justifyContent = 'center';
       musicDiv.style.flexDirection = 'column';
-      musicDiv.innerHTML = `<div style="font-size:64px; color: #ccc; margin-bottom: 16px;">🎵</div>
-                            <p style="color:#888;">음악 라이브러리</p>`;
+      musicDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">🎵</div><p style="color:#888;">음악 라이브러리</p>`;
       mainContent.appendChild(musicDiv);
-    }
-    else if (activeTab === 'sheet') {
+    } else if (activeTab === 'sheet') {
       const sheetDiv = document.createElement('div');
       sheetDiv.style.height = '100%';
       sheetDiv.style.display = 'flex';
       sheetDiv.style.alignItems = 'center';
       sheetDiv.style.justifyContent = 'center';
       sheetDiv.style.flexDirection = 'column';
-      sheetDiv.innerHTML = `<div style="font-size:64px; color: #ccc; margin-bottom: 16px;">📄</div>
-                            <p style="color:#888;">악보 보관함</p>`;
+      sheetDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">📄</div><p style="color:#888;">악보 보관함</p>`;
       mainContent.appendChild(sheetDiv);
-    }
-    else if (activeTab === 'info') {
+    } else if (activeTab === 'info') {
       const infoDiv = document.createElement('div');
       infoDiv.style.height = '100%';
       infoDiv.style.display = 'flex';
       infoDiv.style.alignItems = 'center';
       infoDiv.style.justifyContent = 'center';
       infoDiv.style.flexDirection = 'column';
-      infoDiv.innerHTML = `<div style="font-size:64px; color: #ccc; margin-bottom: 16px;">ℹ️</div>
-                            <p style="color:#888;">정보</p>`;
+      infoDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">ℹ️</div><p style="color:#888;">정보</p>`;
       mainContent.appendChild(infoDiv);
     }
   }
 
-  // 사람 그룹 생성 함수
-  function createPersonGroup(person, isOliver) {
-    const div = document.createElement('div');
-    div.className = 'person';
-    if (isOliver) div.classList.add('oliver');
-    else if (person.name === 'Claire') div.classList.add('claire');
-    else if (person.name === 'James') div.classList.add('james');
-
-    const header = document.createElement('div');
-    header.className = 'person-header center';
-    header.innerHTML = `<span class="emoji">${person.emoji}</span><span>${person.name}</span>`;
-    div.appendChild(header);
-
-    const buttonsDiv = document.createElement('div');
-    buttonsDiv.className = 'buttons center';
-
-    if (person.name === 'Claire') {
-      person.buttons.slice(0,3).forEach((btnText, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'photo-btn';
-        btn.textContent = btnText;
-        btn.addEventListener('click', () => openGallery(person.buttonsPhotos[idx]));
-        buttonsDiv.appendChild(btn);
-      });
-      const brNode = document.createElement('div');
-      brNode.style.flexBasis = '100%';
-      buttonsDiv.appendChild(brNode);
-      person.buttons.slice(3).forEach((btnText, idx) => {
-        const actualIdx = idx + 3;
-        const btn = document.createElement('button');
-        btn.className = 'photo-btn';
-        btn.textContent = btnText;
-        btn.addEventListener('click', () => openGallery(person.buttonsPhotos[actualIdx]));
-        buttonsDiv.appendChild(btn);
-      });
-    } else {
-      person.buttons.forEach((btnText, btnIndex) => {
-        const btn = document.createElement('button');
-        btn.className = 'photo-btn';
-        btn.textContent = btnText;
-        btn.addEventListener('click', () => openGallery(person.buttonsPhotos[btnIndex]));
-        buttonsDiv.appendChild(btn);
-      });
-    }
-
-    div.appendChild(buttonsDiv);
-    return div;
+  function openGallery(photos) {
+    selectedPhotos = photos;
+    currentPhotoIndex = 0;
+    updateGallery();
+    galleryOverlay.style.display = 'flex';
   }
 
-  // 그룹 간 구분선 추가 함수
-  function addGroupDivider(container) {
-    const div = document.createElement('div');
-    div.className = 'group-divider';
-    container.appendChild(div);
+  function closeGallery() {
+    selectedPhotos = null;
+    currentPhotoIndex = 0;
+    galleryOverlay.style.display = 'none';
+  }
+
+  function updateGallery() {
+    if (!selectedPhotos) return;
+    galleryImg.src = selectedPhotos[currentPhotoIndex];
+    galleryCounter.textContent = `${currentPhotoIndex + 1} / ${selectedPhotos.length}`;
+  }
+
+  function nextPhoto() {
+    if (!selectedPhotos) return;
+    currentPhotoIndex = (currentPhotoIndex + 1) % selectedPhotos.length;
+    updateGallery();
+  }
+
+  function prevPhoto() {
+    if (!selectedPhotos) return;
+    currentPhotoIndex = (currentPhotoIndex - 1 + selectedPhotos.length) % selectedPhotos.length;
+    updateGallery();
   }
 
   let startX = 0, endX = 0;
@@ -465,51 +371,19 @@
     endX = 0;
   });
 
-  function openGallery(photos) {
-    selectedPhotos = photos;
-    currentPhotoIndex = 0;
-    updateGallery();
-    galleryOverlay.style.display = 'flex';
-  }
-
-  function closeGallery() {
-    selectedPhotos = null;
-    currentPhotoIndex = 0;
-    galleryOverlay.style.display = 'none';
-  }
-
-  function updateGallery() {
-    if (!selectedPhotos) return;
-    const img = document.getElementById('gallery-img');
-    img.src = selectedPhotos[currentPhotoIndex];
-    const counter = document.getElementById('gallery-counter');
-    counter.textContent = (currentPhotoIndex + 1) + ' / ' + selectedPhotos.length;
-  }
-
-  function nextPhoto() {
-    if (!selectedPhotos) return;
-    currentPhotoIndex = (currentPhotoIndex + 1) % selectedPhotos.length;
-    updateGallery();
-  }
-
-  function prevPhoto() {
-    if (!selectedPhotos) return;
-    currentPhotoIndex = (currentPhotoIndex - 1 + selectedPhotos.length) % selectedPhotos.length;
-    updateGallery();
-  }
-
+  // 이벤트 리스너 한번만 등록
   Object.values(tabButtons).forEach(button => {
     button.addEventListener('click', () => {
-      activeTab = button.id.split('-')[1];
-      if(activeTab === 'home' || activeTab === 'photos' || activeTab === 'music' || activeTab === 'sheet' || activeTab === 'info'){
+      const key = Object.keys(tabButtons).find(k => tabButtons[k] === button);
+      if(key) {
+        activeTab = key;
         render();
       }
     });
   });
-
-  document.getElementById('gallery-close').addEventListener('click', closeGallery);
-  document.getElementById('gallery-next').addEventListener('click', nextPhoto);
-  document.getElementById('gallery-prev').addEventListener('click', prevPhoto);
+  galleryCloseBtn.addEventListener('click', closeGallery);
+  galleryPrevBtn.addEventListener('click', prevPhoto);
+  galleryNextBtn.addEventListener('click', nextPhoto);
 
   render();
 </script>
