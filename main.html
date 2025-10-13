@@ -17,9 +17,11 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    border: 2px solid #001FE9;
-    border-top: none;
+    /* 좌우 두께 있는 파란 테두리만 */
+    border-left: 2px solid #001FE9;
+    border-right: 2px solid #001FE9;
     box-sizing: border-box;
+    position: relative;
   }
   header {
     text-align: center;
@@ -30,13 +32,19 @@
     border-bottom: 2px solid #001FE9;
     background-color: #fadbdf;
     flex-shrink: 0;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px;
+    z-index: 10;
   }
   main {
     flex-grow: 1;
-    overflow: hidden;
+    overflow-y: auto;
     background-color: #fadbdf;
-    position: relative;
-    padding: 12px 12px 0 12px;
+    padding: 112px 12px 62px 12px; /* 상단 header 56px x2, 하단 nav 56px 높이 고려 */
     box-sizing: border-box;
   }
   nav {
@@ -44,22 +52,31 @@
     border-top: 2px solid #001FE9;
     background-color: #fadbdf;
     flex-shrink: 0;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px;
+    z-index: 10;
   }
   nav button {
     flex: 1;
-    padding: 10px 0; /* 기존 8px에서 20% 증가 */
+    padding: 10px 0;
     border: none;
     cursor: pointer;
-    font-size: 1.25rem; /* 텍스트가 아이콘으로 바뀌므로 약간 키움 */
+    font-size: 1.25rem;
     background-color: #fadbdf;
     color: #001FE9;
     transition: background-color 0.3s, color 0.3s;
-    /* 좌우 파란선 삭제 */
-    border-right: none; 
+    border-right: 2px solid #001FE9;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  nav button:last-child {
+    border-right: none;
   }
   nav button.active {
     background-color: #001FE9;
@@ -183,23 +200,18 @@
   <main id="main-content"></main>
   <nav>
     <button id="tab-home-btn" class="active" aria-label="홈">
-      <!-- 홈 아이콘 -->
       <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
     </button>
     <button id="tab-photos-btn" aria-label="사진">
-      <!-- 사진 아이콘 -->
       <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM7 9l2.5 3.01L12.5 9l4.5 6H5l2-3z"/></svg>
     </button>
     <button id="tab-music-btn" aria-label="음악">
-      <!-- 음악 아이콘 -->
       <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
     </button>
     <button id="tab-sheet-btn" aria-label="악보">
-      <!-- 악보 아이콘 -->
       <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM7 17l5-5-5-5v10z"/></svg>
     </button>
     <button id="tab-info-btn" aria-label="정보">
-      <!-- 정보 아이콘 -->
       <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg>
     </button>
   </nav>
