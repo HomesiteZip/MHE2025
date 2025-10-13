@@ -12,12 +12,11 @@
     overflow: hidden;
   }
   #app {
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: 360px; /* 기존 400px에서 줄임 */
+    margin: 0 auto 0 auto;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    /* 좌우 두께 있는 파란 테두리만 */
     border-left: 2px solid #001FE9;
     border-right: 2px solid #001FE9;
     box-sizing: border-box;
@@ -37,15 +36,17 @@
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 400px;
+    max-width: 360px;
     z-index: 10;
   }
   main {
     flex-grow: 1;
     overflow-y: auto;
     background-color: #fadbdf;
-    padding: 112px 12px 62px 12px; /* 상단 header 56px x2, 하단 nav 56px 높이 고려 */
+    padding: 12px; /* 상하좌우 동일 여백 */
     box-sizing: border-box;
+    margin-top: 56px; /* header 높이 만큼 띄움 */
+    margin-bottom: 56px; /* nav 높이 만큼 띄움 */
   }
   nav {
     display: flex;
@@ -57,7 +58,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 400px;
+    max-width: 360px;
     z-index: 10;
   }
   nav button {
@@ -69,24 +70,54 @@
     background-color: #fadbdf;
     color: #001FE9;
     transition: background-color 0.3s, color 0.3s;
-    border-right: 2px solid #001FE9;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  nav button:last-child {
-    border-right: none;
+    position: relative;
   }
   nav button.active {
     background-color: #001FE9;
     color: #FFF2DA;
   }
+  /* 세로 파란선 버튼 사이 추가 */
+  nav button:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 20%;
+    right: 0;
+    width: 2px;
+    height: 60%;
+    background-color: #001FE9;
+  }
+  /* 홈 버튼 왼쪽에도 세로선 추가 */
+  nav button#tab-home-btn::before {
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 2px;
+    height: 60%;
+    background-color: #001FE9;
+  }
+  /* 정보 버튼 오른쪽에도 세로선 추가 */
+  nav button#tab-info-btn::after {
+    content: "";
+    position: absolute;
+    top: 20%;
+    right: 0;
+    width: 2px;
+    height: 60%;
+    background-color: #001FE9;
+  }
+
   .tab-home {
     height: 100%;
     background-image: url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=1200&q=80');
     background-size: cover;
     background-position: center;
+    margin: 0; /* 상단 여백 제거 */
+    padding: 0;
   }
   .person {
     max-width: 100%;
