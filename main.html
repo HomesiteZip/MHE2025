@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MAYBE HAPPY ENDING</title>
+<title>Mobile Event App</title>
 <style>
   body, html {
     margin: 0; padding: 0; height: 100%;
-    background-color: #fadbdf;
+    background-color: #FFF2DA;
     font-family: Arial, sans-serif;
   }
   #app {
@@ -26,13 +26,13 @@
     color: #001FE9;
     padding: 12px 0;
     border-bottom: 2px solid #001FE9;
-    background-color: #fadbdf;
+    background-color: #FFF2DA;
   }
   main {
     flex: 1;
     overflow-y: auto;
     padding: 12px;
-    background-color: #fadbdf;
+    background-color: #FFF2DA;
     position: relative;
   }
   nav {
@@ -45,7 +45,7 @@
     border: none;
     cursor: pointer;
     font-size: 1rem;
-    background-color: #fadbdf;
+    background-color: #FFF2DA;
     color: #001FE9;
     transition: background-color 0.3s, color 0.3s;
     border-right: 2px solid #001FE9;
@@ -55,7 +55,7 @@
   }
   nav button.active {
     background-color: #001FE9;
-    color: #fadbdf;
+    color: #FFF2DA;
   }
   .tab-home {
     height: 100%;
@@ -147,7 +147,7 @@
   }
   #gallery-counter {
     text-align: center;
-    color: #fadbdf;
+    color: #FFF2DA;
     margin-top: 8px;
     font-size: 1rem;
   }
@@ -180,7 +180,7 @@
 </div>
 
 <script>
-  // 데이터 (버튼마다 다른 사진 배열 포함)
+  // 데이터: 모든 person 타입 'text'로 바꾸고 버튼 텍스트 수정
   const photoData = [
     { 
       name: 'Oliver',
@@ -199,24 +199,26 @@
       name: 'Claire',
       emoji: '😄',
       align: 'center',
-      type: 'icon',
-      rows: [[3], [2]],
-      photos: [
-        'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
-        'https://images.unsplash.com/photo-1518893063132-36e46dbe2428?w=800&q=80',
-        'https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'
+      type: 'text',
+      buttons: ['전미도', '최수진', '박지연', '박진주', '방민아'],
+      buttonsPhotos: [
+        ['https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80'], // 전미도
+        ['https://images.unsplash.com/photo-1518893063132-36e46dbe2428?w=800&q=80'], // 최수진
+        ['https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'], // 박지연
+        ['https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80'], // 박진주
+        ['https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80']  // 방민아
       ]
     },
     { 
       name: 'James',
       emoji: '🙂',
       align: 'center',
-      type: 'icon',
-      rows: [[3]],
-      photos: [
-        'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
-        'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
-        'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80'
+      type: 'text',
+      buttons: ['이시안', '고훈정', '박세훈'],
+      buttonsPhotos: [
+        ['https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80'], // 이시안
+        ['https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80'], // 고훈정
+        ['https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80']  // 박세훈
       ]
     }
   ];
@@ -236,7 +238,6 @@
   };
 
   function render() {
-    // 탭 버튼 활성화 클래스 처리
     Object.keys(tabButtons).forEach(key => {
       tabButtons[key].classList.toggle('active', key === activeTab);
     });
@@ -261,32 +262,13 @@
         const buttonsDiv = document.createElement('div');
         buttonsDiv.className = 'buttons center';
 
-        if (person.type === 'text') {
-          person.buttons.forEach((btnText, btnIndex) => {
-            const btn = document.createElement('button');
-            btn.className = 'photo-btn';
-            btn.textContent = btnText;
-            btn.addEventListener('click', () => openGallery(person.buttonsPhotos[btnIndex]));
-            buttonsDiv.appendChild(btn);
-          });
-        } else if (person.type === 'icon') {
-          person.rows.forEach(row => {
-            const rowDiv = document.createElement('div');
-            rowDiv.style.display = 'flex';
-            rowDiv.style.justifyContent = 'center';
-            rowDiv.style.gap = '10px';
-            row.forEach(() => {
-              const iconBtn = document.createElement('button');
-              iconBtn.className = 'photo-btn';
-              iconBtn.textContent = '📷';
-              iconBtn.style.width = '60px';
-              iconBtn.style.height = '60px';
-              iconBtn.addEventListener('click', () => openGallery(person.photos));
-              rowDiv.appendChild(iconBtn);
-            });
-            buttonsDiv.appendChild(rowDiv);
-          });
-        }
+        person.buttons.forEach((btnText, btnIndex) => {
+          const btn = document.createElement('button');
+          btn.className = 'photo-btn';
+          btn.textContent = btnText;
+          btn.addEventListener('click', () => openGallery(person.buttonsPhotos[btnIndex]));
+          buttonsDiv.appendChild(btn);
+        });
 
         personDiv.appendChild(buttonsDiv);
         mainContent.appendChild(personDiv);
