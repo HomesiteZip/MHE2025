@@ -259,7 +259,7 @@
 </div>
 
 <script>
-  // 필요한 DOM 미리 참조
+  // 변수 선언 딱 1회
   const mainContent = document.getElementById('main-content');
   const galleryOverlay = document.getElementById('gallery-overlay');
   const galleryImg = document.getElementById('gallery-img');
@@ -275,7 +275,6 @@
   const galleryPrevBtn = document.getElementById('gallery-prev');
   const galleryNextBtn = document.getElementById('gallery-next');
 
-  // 데이터 및 상태
   const photoData = [
     { 
       name: 'Oliver',
@@ -283,26 +282,18 @@
       type: 'text',
       buttons: ['김재범', '신성민', '전성우', '정휘'],
       buttonsPhotos: [
-        [
-          'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80',
-          'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
-          'https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80',
-        ],
-        [
-          'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
-          'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
-          'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
-        ],
-        [
-          'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
-          'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
-          'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80',
-        ],
-        [
-          'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
-          'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
-          'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
-        ],
+        ['https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80',
+         'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
+         'https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
+         'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
+         'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+         'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
+         'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
+         'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
+         'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80'],
       ]
     },
     {
@@ -311,31 +302,21 @@
       type: 'text',
       buttons: ['전미도', '최수진', '박지연', '박진주', '방민아'],
       buttonsPhotos: [
-        [
-          'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
-          'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
-          'https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80',
-        ],
-        [
-          'https://images.unsplash.com/photo-1518893063132-36e46dbe2428?w=800&q=80',
-          'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
-          'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
-        ],
-        [
-          'https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80',
-          'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
-          'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
-        ],
-        [
-          'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
-          'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
-          'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
-        ],
-        [
-          'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
-          'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
-          'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
-        ],
+        ['https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
+         'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+         'https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1518893063132-36e46dbe2428?w=800&q=80',
+         'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
+         'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80',
+         'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+         'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
+         'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
+         'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+         'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
+         'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80'],
       ],
     },
     {
@@ -344,33 +325,26 @@
       type: 'text',
       buttons: ['이시안', '고훈정', '박세훈'],
       buttonsPhotos: [
-        [
-          'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
-          'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
-          'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
-        ],
-        [
-          'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
-          'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
-          'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
-        ],
-        [
-          'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
-          'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80',
-          'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
-        ]
-      ]
+        ['https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80',
+         'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+         'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
+         'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
+         'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80'],
+        ['https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+         'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80',
+         'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80'],
+      ],
     },
   ];
 
   let activeTab = 'home';
   let selectedPhotos = null;
   let currentPhotoIndex = 0;
-  let clickDisabled = false; // 디바운스용
+  let clickDisabled = false;
 
-  // 렌더링 함수 외 필요한 요소를 미리 캐싱
   function render() {
-    Object.values(tabButtons).forEach(btn => btn.classList.remove('active'));
+    Object.values(tabButtons).forEach(button => button.classList.remove('active'));
     tabButtons[activeTab].classList.add('active');
 
     mainContent.innerHTML = '';
@@ -387,28 +361,23 @@
         const div = document.createElement('div');
         div.className = 'person ' + name.toLowerCase();
 
-        // Oliver만 상단 여백 절반
         if (name === 'Oliver') div.style.marginTop = '50px';
 
-        // 이름 헤더
         const header = document.createElement('div');
         header.className = 'person-header center';
         header.innerHTML = `<span class="emoji">${person.emoji}</span><span>${person.name}</span>`;
         div.appendChild(header);
 
-        // a,b 그룹 사이, b,c 그룹 사이 가로 라인 (마지막 그룹 제외)
         if (name !== arr[arr.length - 1]) {
           const divider = document.createElement('div');
           divider.className = 'group-divider';
           div.appendChild(divider);
         }
 
-        // 버튼 그룹
         const buttonsDiv = document.createElement('div');
         buttonsDiv.className = 'buttons center';
 
         if (name === 'Claire') {
-          // 3개씩 줄바꿈 적용
           person.buttons.slice(0, 3).forEach((btnText, idx) => {
             const btn = createPhotoButton(btnText, person.buttonsPhotos[idx]);
             buttonsDiv.appendChild(btn);
@@ -426,6 +395,7 @@
             buttonsDiv.appendChild(btn);
           });
         }
+
         div.appendChild(buttonsDiv);
         mainContent.appendChild(div);
       });
@@ -459,13 +429,12 @@
     }
   }
 
-  // 버튼 생성 함수
   function createPhotoButton(text, photos) {
-    const button = document.createElement('button');
-    button.className = 'photo-btn';
-    button.textContent = text;
-    button.addEventListener('click', () => openGallery(photos));
-    return button;
+    const btn = document.createElement('button');
+    btn.className = 'photo-btn';
+    btn.textContent = text;
+    btn.addEventListener('click', () => openGallery(photos));
+    return btn;
   }
 
   function openGallery(photos) {
@@ -481,14 +450,13 @@
     galleryOverlay.style.display = 'none';
   }
 
-  // 디바운스 적용해 중복 클릭 막기
-  let clickDisabled = false;
   function updateGallery() {
     if (!selectedPhotos) return;
     galleryImg.src = selectedPhotos[currentPhotoIndex];
     galleryCounter.textContent = `${currentPhotoIndex + 1} / ${selectedPhotos.length}`;
   }
 
+  let clickDisabled = false;
   function nextPhoto() {
     if (clickDisabled || !selectedPhotos) return;
     clickDisabled = true;
@@ -505,7 +473,6 @@
     setTimeout(() => { clickDisabled = false; }, 300);
   }
 
-  // 이벤트 리스너 딱 한 번만 등록
   Object.values(tabButtons).forEach(button => {
     button.addEventListener('click', () => {
       const key = Object.keys(tabButtons).find(k => tabButtons[k] === button);
