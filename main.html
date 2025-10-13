@@ -1,713 +1,395 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Musical MAYBE HAPPY ENDING</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        :root {
-            --navy: #1e3a5f;
-            --pink: #ff6b9d;
-            --light-pink: #ffb3d1;
-            --black: #000000;
-            --white: #ffffff;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--navy);
-            color: var(--black);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-
-        /* 로딩 페이지 */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--navy);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 0.5s ease-out;
-        }
-
-        .loading-screen.fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loading-dot {
-            width: 12px;
-            height: 12px;
-            background-color: var(--white);
-            border-radius: 50%;
-            animation: pulse 1.5s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.3;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.2);
-            }
-        }
-
-        /* 메인 콘텐츠는 처음에 숨김 */
-        .main-content {
-            opacity: 0;
-            transition: opacity 0.5s ease-in;
-        }
-
-        .main-content.show {
-            opacity: 1;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 480px;
-            background-color: var(--white);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .hero-image {
-            width: 100%;
-            height: 100vh;
-            background-image: url('https://raw.githubusercontent.com/HomesiteZip/MHE2025/refs/heads/main/poster.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .download-hint {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.6);
-            color: var(--white);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        .hero-image:active .download-hint {
-            opacity: 1;
-        }
-
-        .content {
-            flex: 1;
-            padding: 40px 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 30px;
-        }
-
-        .title {
-            font-size: 32px;
-            font-weight: bold;
-            color: var(--navy);
-            margin-bottom: 10px;
-            line-height: 1.2;
-        }
-
-        .title-description {
-            font-size: 18px;
-            font-weight: 400;
-            color: var(--black);
-            line-height: 1.5;
-            margin-bottom: 20px;
-            opacity: 0.8;
-        }
-
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-            max-width: 280px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 16px 32px;
-            background-color: var(--light-pink);
-            color: var(--black);
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            font-family: inherit;
-        }
-
-        .btn:hover {
-            background-color: var(--pink);
-            color: var(--white);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        /* 갤러리 섹션 */
-        .gallery-section {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-            width: 100%;
-        }
-
-        .gallery-section.open {
-            max-height: 1000px;
-            padding: 30px 0;
-        }
-
-        .gallery-description {
-            font-size: 16px;
-            color: var(--black);
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            width: 100%;
-        }
-
-        .gallery-item {
-            aspect-ratio: 1;
-            background-color: var(--light-pink);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 32px;
-            border: none;
-        }
-
-        .gallery-item:active {
-            background-color: var(--pink);
-        }
-
-        /* 이미지 팝업 */
-        .image-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .image-popup.show {
-            display: flex;
-        }
-
-        .popup-content {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .popup-image {
-            max-width: 90%;
-            max-height: 80%;
-            object-fit: contain;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .download-popup-hint {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            color: var(--white);
-            padding: 15px 25px;
-            border-radius: 10px;
-            font-size: 16px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-            z-index: 10002;
-        }
-
-        .download-popup-hint.show {
-            opacity: 1;
-        }
-
-        .close-popup {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 36px;
-            cursor: pointer;
-            padding: 10px;
-            line-height: 1;
-            z-index: 10001;
-        }
-
-        .slide-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 48px;
-            cursor: pointer;
-            z-index: 10001;
-            padding: 20px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-        }
-
-        .slide-btn:active {
-            opacity: 0.7;
-        }
-
-        .slide-btn.prev {
-            left: 10px;
-        }
-
-        .slide-btn.next {
-            right: 10px;
-        }
-
-        .slide-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--white);
-            font-size: 14px;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 8px 16px;
-            border-radius: 20px;
-        }
-
-        .footer {
-            padding: 30px 20px;
-            text-align: center;
-            font-size: 14px;
-            color: var(--black);
-            opacity: 0.6;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            margin-top: auto;
-        }
-
-        /* 데스크탑에서 좌우 여백 처리 */
-        @media (min-width: 481px) {
-            body {
-                background-color: var(--navy);
-            }
-            
-            .container {
-                margin: 0 auto;
-                box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
-            }
-        }
-
-        /* 큰 화면에서 세로 중앙 정렬 */
-        @media (min-width: 769px) {
-            body {
-                align-items: center;
-                padding: 20px 0;
-            }
-            
-            .container {
-                min-height: calc(100vh - 40px);
-                border-radius: 20px;
-                overflow: hidden;
-            }
-        }
-
-        /* 모바일 세로 화면 최적화 */
-        @media (max-width: 480px) and (orientation: portrait) {
-            .hero-image {
-                height: 100vh;
-            }
-            
-            .content {
-                padding: 30px 20px;
-            }
-            
-            .title {
-                font-size: 28px;
-            }
-            
-            .title-description {
-                font-size: 16px;
-            }
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mobile Event App</title>
+<style>
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    background-color: #FFF2DA;
+    font-family: Arial, sans-serif;
+  }
+  #app {
+    max-width: 400px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #001FE9;
+    border-top: none;
+  }
+  header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: #001FE9;
+    padding: 12px 0;
+    border-bottom: 2px solid #001FE9;
+    background-color: #FFF2DA;
+  }
+  main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    background-color: #FFF2DA;
+    position: relative;
+  }
+  nav {
+    display: flex;
+    border-top: 2px solid #001FE9;
+  }
+  nav button {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    background-color: #FFF2DA;
+    color: #001FE9;
+    transition: background-color 0.3s, color 0.3s;
+    border-right: 2px solid #001FE9;
+  }
+  nav button:last-child {
+    border-right: none;
+  }
+  nav button.active {
+    background-color: #001FE9;
+    color: #FFF2DA;
+  }
+  .tab-home {
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+  }
+  .person {
+    margin-bottom: 24px;
+    max-width: 100%;
+  }
+  .person-header {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: #001FE9;
+    margin-bottom: 8px;
+    gap: 6px;
+  }
+  .person-header.left { justify-content: flex-start; }
+  .person-header.right { justify-content: flex-end; }
+  .person-header.center { justify-content: center; }
+  .emoji { font-size: 2rem; }
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .buttons.left { justify-content: flex-start; }
+  .buttons.right { justify-content: flex-end; }
+  .buttons.center { justify-content: center; }
+  button.photo-btn {
+    min-width: 70px;
+    background-color: #001FE9;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  button.photo-btn:hover {
+    transform: scale(1.05);
+  }
+  /* Gallery Overlay */
+  #gallery-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  #gallery-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 80%;
+  }
+  #gallery-content img {
+    width: 100%;
+    max-height: 80vh;
+    border-radius: 10px;
+    user-select: none;
+  }
+  #gallery-close,
+  #gallery-prev,
+  #gallery-next {
+    position: fixed;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  #gallery-close {
+    top: 20px;
+    right: 20px;
+  }
+  #gallery-prev {
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+  }
+  #gallery-next {
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+  }
+  #gallery-counter {
+    text-align: center;
+    color: #FFF2DA;
+    margin-top: 8px;
+    font-size: 1rem;
+  }
+</style>
 </head>
 <body>
-    <!-- 로딩 화면 -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-dot"></div>
-    </div>
+<div id="app">
+  <header>MAYBE HAPPY ENDING</header>
+  <main id="main-content">
+    <!-- 내용은 JS로 채움 -->
+  </main>
+  <nav>
+    <button id="tab-home-btn" class="active">홈</button>
+    <button id="tab-photos-btn">사진</button>
+    <button id="tab-music-btn">음악</button>
+    <button id="tab-sheet-btn">악보</button>
+    <button id="tab-info-btn">정보</button>
+  </nav>
+</div>
 
-    <!-- 메인 콘텐츠 -->
-    <div class="main-content" id="mainContent">
-        <div class="container">
-            <!-- 히어로 이미지 섹션 -->
-            <div class="hero-image" id="heroImage">
-                <div class="download-hint">꾹 눌러서 이미지 저장</div>
-            </div>
+<!-- 갤러리 오버레이 -->
+<div id="gallery-overlay">
+  <button id="gallery-close" title="닫기">×</button>
+  <button id="gallery-prev" title="이전">‹</button>
+  <div id="gallery-content">
+    <img id="gallery-img" src="" alt="Gallery Image" draggable="false" />
+    <div id="gallery-counter"></div>
+  </div>
+  <button id="gallery-next" title="다음">›</button>
+</div>
 
-            <!-- 메인 콘텐츠 -->
-            <div class="content">
-                <div>
-                    <h1 class="title">Musical MAYBE HAPPY ENDING</h1>
-                    <p class="title-description">
-                        특별한 뮤지컬 공연을 경험해보세요.<br>
-                        감동과 즐거움이 가득한 무대를 선사합니다.
-                    </p>
-                </div>
+<script>
+  // 데이터 (리액트에 있던 photoData)
+  const photoData = [
+    { 
+      name: 'Oliver',
+      emoji: '😊',
+      align: 'left',
+      type: 'text',
+      buttons: ['김재범', '신성민', '전성우', '정휘'],
+      photos: [
+        'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&q=80',
+        'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80',
+        'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80'
+      ]
+    },
+    { 
+      name: 'Claire',
+      emoji: '😄',
+      align: 'right',
+      type: 'icon',
+      rows: [[3], [2]],
+      photos: [
+        'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
+        'https://images.unsplash.com/photo-1518893063132-36e46dbe2428?w=800&q=80',
+        'https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&q=80'
+      ]
+    },
+    { 
+      name: 'James',
+      emoji: '🙂',
+      align: 'center',
+      type: 'icon',
+      rows: [[3]],
+      photos: [
+        'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
+        'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+        'https://images.unsplash.com/photo-1464820453369-31d2c0b651af?w=800&q=80'
+      ]
+    }
+  ];
 
-                <div class="button-group">
-                    <button class="btn" id="galleryToggle">미공개 셀카 확인하기</button>
-                    
-                    <!-- 갤러리 섹션 (접혀있음) -->
-                    <div class="gallery-section" id="gallerySection">
-                        <p class="gallery-description">
-                            배우들의 특별한 순간을 담은 미공개 셀카를 만나보세요!<br>
-                            사진을 클릭하면 크게 볼 수 있습니다.
-                        </p>
-                        <div class="gallery-grid">
-                            <button class="gallery-item" onclick="openPopup(1)">📷</button>
-                            <button class="gallery-item" onclick="openPopup(2)">📷</button>
-                            <button class="gallery-item" onclick="openPopup(3)">📷</button>
-                            <button class="gallery-item" onclick="openPopup(4)">📷</button>
-                            <button class="gallery-item" onclick="openPopup(5)">📷</button>
-                            <button class="gallery-item" onclick="openPopup(6)">📷</button>
-                            <button class="gallery-item" onclick="openPopup(7)">📷</button>
-                            <button class="gallery-item" onclick="openPopup(8)">📷</button>
-                            <button class="gallery-item" onclick="openPopup(9)">📷</button>
-                        </div>
-                    </div>
-                    
-                    <a href="https://google.com" class="btn" target="_blank">공연 정보 보기</a>
-                    <a href="https://google.com" class="btn" target="_blank">출연진 소개</a>
-                </div>
-            </div>
+  // 현재 선택된 탭
+  let activeTab = 'home';
+  // 갤러리 관련 변수
+  let selectedPhotos = null;
+  let currentPhotoIndex = 0;
 
-            <!-- 푸터 -->
-            <div class="footer">
-                2025 Musical MAYBE HAPPY ENDING
-            </div>
-        </div>
-    </div>
+  const mainContent = document.getElementById('main-content');
 
-    <!-- 이미지 팝업 -->
-    <div class="image-popup" id="imagePopup">
-        <div class="popup-content">
-            <button class="close-popup" onclick="closePopup()">×</button>
-            <button class="slide-btn prev" onclick="prevSlide()">‹</button>
-            <img src="" alt="셀카" class="popup-image" id="popupImage">
-            <button class="slide-btn next" onclick="nextSlide()">›</button>
-            <div class="slide-indicator" id="slideIndicator">1 / 3</div>
-            <div class="download-popup-hint" id="downloadPopupHint">꾹 눌러서 이미지 저장</div>
-        </div>
-    </div>
+  // 탭 버튼들
+  const tabButtons = {
+    home: document.getElementById('tab-home-btn'),
+    photos: document.getElementById('tab-photos-btn'),
+    music: document.getElementById('tab-music-btn'),
+    sheet: document.getElementById('tab-sheet-btn'),
+    info: document.getElementById('tab-info-btn')
+  };
 
-    <script>
-        // 2초 후 로딩 화면 사라지고 메인 콘텐츠 표시
-        setTimeout(() => {
-            const loadingScreen = document.getElementById('loadingScreen');
-            const mainContent = document.getElementById('mainContent');
-            
-            // 로딩 화면 페이드아웃
-            loadingScreen.classList.add('fade-out');
-            
-            // 메인 콘텐츠 페이드인
-            setTimeout(() => {
-                mainContent.classList.add('show');
-            }, 500);
-            
-        }, 2000);
+  function render() {
+    // 탭 버튼 active 클래스 처리
+    Object.keys(tabButtons).forEach(key => {
+      tabButtons[key].classList.toggle('active', key === activeTab);
+    });
 
-        // 히어로 이미지 길게 눌러서 다운로드
-        const heroImage = document.getElementById('heroImage');
-        let longPressTimer;
+    // 컨텐츠 초기화
+    mainContent.innerHTML = '';
 
-        heroImage.addEventListener('touchstart', (e) => {
-            longPressTimer = setTimeout(() => {
-                downloadImage();
-            }, 800);
-        });
+    if (activeTab === 'home') {
+      // 홈 탭: 배경 이미지 채우기
+      const homeDiv = document.createElement('div');
+      homeDiv.className = 'tab-home';
+      mainContent.appendChild(homeDiv);
+    }
+    else if (activeTab === 'photos') {
+      photoData.forEach(person => {
+        const personDiv = document.createElement('div');
+        personDiv.className = 'person';
 
-        heroImage.addEventListener('touchend', () => {
-            clearTimeout(longPressTimer);
-        });
+        const header = document.createElement('div');
+        header.className = 'person-header ' + (person.align || 'center');
+        header.innerHTML = `<span class="emoji">${person.emoji}</span><span>${person.name}</span>`;
+        personDiv.appendChild(header);
 
-        heroImage.addEventListener('touchmove', () => {
-            clearTimeout(longPressTimer);
-        });
+        const buttonsDiv = document.createElement('div');
+        buttonsDiv.className = 'buttons ' + (person.align || 'center');
 
-        // PC에서 클릭으로도 다운로드
-        heroImage.addEventListener('click', () => {
-            downloadImage();
-        });
-
-        function downloadImage() {
-            const imageUrl = 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/refs/heads/main/poster.jpg';
-            const link = document.createElement('a');
-            link.href = imageUrl;
-            link.download = 'MAYBE_HAPPY_ENDING_Poster.jpg';
-            link.target = '_blank';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        if (person.type === 'text') {
+          person.buttons.forEach(btnText => {
+            const btn = document.createElement('button');
+            btn.className = 'photo-btn';
+            btn.textContent = btnText;
+            btn.addEventListener('click', () => openGallery(person.photos));
+            buttonsDiv.appendChild(btn);
+          });
         }
-
-        // 갤러리 토글 기능
-        const galleryToggle = document.getElementById('galleryToggle');
-        const gallerySection = document.getElementById('gallerySection');
-
-        if (galleryToggle && gallerySection) {
-            galleryToggle.addEventListener('click', () => {
-                gallerySection.classList.toggle('open');
+        else if (person.type === 'icon') {
+          person.rows.forEach(row => {
+            const rowDiv = document.createElement('div');
+            rowDiv.style.display = 'flex';
+            rowDiv.style.justifyContent = person.align === 'left' ? 'flex-start' :
+                                        person.align === 'right' ? 'flex-end' : 'center';
+            rowDiv.style.gap = '10px';
+            row.forEach(() => {
+              const iconBtn = document.createElement('button');
+              iconBtn.className = 'photo-btn';
+              iconBtn.textContent = '📷'; // 아이콘 대신 이모지 사용
+              iconBtn.style.width = '60px';
+              iconBtn.style.height = '60px';
+              iconBtn.addEventListener('click', () => openGallery(person.photos));
+              rowDiv.appendChild(iconBtn);
             });
+            buttonsDiv.appendChild(rowDiv);
+          });
         }
 
-        // 이미지 팝업 기능
-        const imagePopup = document.getElementById('imagePopup');
-        const popupImage = document.getElementById('popupImage');
-        const slideIndicator = document.getElementById('slideIndicator');
+        personDiv.appendChild(buttonsDiv);
+        mainContent.appendChild(personDiv);
+      });
+    }
+    else if (activeTab === 'music') {
+      const musicDiv = document.createElement('div');
+      musicDiv.style.height = '100%';
+      musicDiv.style.display = 'flex';
+      musicDiv.style.alignItems = 'center';
+      musicDiv.style.justifyContent = 'center';
+      musicDiv.style.flexDirection = 'column';
+      musicDiv.innerHTML = `<div style="font-size:64px; color: #ccc; margin-bottom: 16px;">🎵</div>
+                            <p style="color:#888;">음악 라이브러리</p>`;
+      mainContent.appendChild(musicDiv);
+    }
+    else if (activeTab === 'sheet') {
+      const sheetDiv = document.createElement('div');
+      sheetDiv.style.height = '100%';
+      sheetDiv.style.display = 'flex';
+      sheetDiv.style.alignItems = 'center';
+      sheetDiv.style.justifyContent = 'center';
+      sheetDiv.style.flexDirection = 'column';
+      sheetDiv.innerHTML = `<div style="font-size:64px; color: #ccc; margin-bottom: 16px;">📄</div>
+                            <p style="color:#888;">악보 보관함</p>`;
+      mainContent.appendChild(sheetDiv);
+    }
+    else if (activeTab === 'info') {
+      const infoDiv = document.createElement('div');
+      infoDiv.style.height = '100%';
+      infoDiv.style.display = 'flex';
+      infoDiv.style.alignItems = 'center';
+      infoDiv.style.justifyContent = 'center';
+      infoDiv.style.flexDirection = 'column';
+      infoDiv.innerHTML = `<div style="font-size:64px; color: #ccc; margin-bottom: 16px;">ℹ️</div>
+                            <p style="color:#888;">정보</p>`;
+      mainContent.appendChild(infoDiv);
+    }
+  }
 
-        // 각 갤러리 아이템당 3장의 이미지 (총 9개 아이템 x 3장 = 27장)
-        const galleryImages = [
-            // 갤러리 1
-            [
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+1+-+Photo+1',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+1+-+Photo+2',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+1+-+Photo+3'
-            ],
-            // 갤러리 2
-            [
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+2+-+Photo+1',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+2+-+Photo+2',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+2+-+Photo+3'
-            ],
-            // 갤러리 3
-            [
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+3+-+Photo+1',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+3+-+Photo+2',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+3+-+Photo+3'
-            ],
-            // 갤러리 4
-            [
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+4+-+Photo+1',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+4+-+Photo+2',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+4+-+Photo+3'
-            ],
-            // 갤러리 5
-            [
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+5+-+Photo+1',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+5+-+Photo+2',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+5+-+Photo+3'
-            ],
-            // 갤러리 6
-            [
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+6+-+Photo+1',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+6+-+Photo+2',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+6+-+Photo+3'
-            ],
-            // 갤러리 7
-            [
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+7+-+Photo+1',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+7+-+Photo+2',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+7+-+Photo+3'
-            ],
-            // 갤러리 8
-            [
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+8+-+Photo+1',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+8+-+Photo+2',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+8+-+Photo+3'
-            ],
-            // 갤러리 9
-            [
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+9+-+Photo+1',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+9+-+Photo+2',
-                'https://via.placeholder.com/800x800/ffb3d1/000000?text=Gallery+9+-+Photo+3'
-            ]
-        ];
+  // 갤러리 열기
+  function openGallery(photos) {
+    selectedPhotos = photos;
+    currentPhotoIndex = 0;
+    updateGallery();
+    document.getElementById('gallery-overlay').style.display = 'flex';
+  }
 
-        let currentGallery = 0;
-        let currentSlide = 0;
+  // 갤러리 닫기
+  function closeGallery() {
+    selectedPhotos = null;
+    currentPhotoIndex = 0;
+    document.getElementById('gallery-overlay').style.display = 'none';
+  }
 
-        window.openPopup = function(galleryIndex) {
-            if (popupImage && imagePopup) {
-                currentGallery = galleryIndex - 1;
-                currentSlide = 0;
-                updateSlide();
-                imagePopup.classList.add('show');
-            }
-        }
+  // 갤러리 사진 갱신
+  function updateGallery() {
+    if (!selectedPhotos) return;
+    const imgElem = document.getElementById('gallery-img');
+    imgElem.src = selectedPhotos[currentPhotoIndex];
+    const counter = document.getElementById('gallery-counter');
+    counter.textContent = `${currentPhotoIndex + 1} / ${selectedPhotos.length}`;
+  }
 
-        window.closePopup = function() {
-            if (imagePopup) {
-                imagePopup.classList.remove('show');
-            }
-        }
+  // 다음 사진
+  function nextPhoto() {
+    if (!selectedPhotos) return;
+    currentPhotoIndex = (currentPhotoIndex + 1) % selectedPhotos.length;
+    updateGallery();
+  }
 
-        window.nextSlide = function() {
-            currentSlide = (currentSlide + 1) % 3;
-            updateSlide();
-        }
+  // 이전 사진
+  function prevPhoto() {
+    if (!selectedPhotos) return;
+    currentPhotoIndex = (currentPhotoIndex - 1 + selectedPhotos.length) % selectedPhotos.length;
+    updateGallery();
+  }
 
-        window.prevSlide = function() {
-            currentSlide = (currentSlide - 1 + 3) % 3;
-            updateSlide();
-        }
+  // 탭 버튼 클릭 이벤트 등록
+  Object.keys(tabButtons).forEach(key => {
+    tabButtons[key].addEventListener('click', () => {
+      activeTab = key;
+      render();
+    });
+  });
 
-        function updateSlide() {
-            popupImage.src = galleryImages[currentGallery][currentSlide];
-            slideIndicator.textContent = `${currentSlide + 1} / 3`;
-        }
+  // 갤러리 버튼 이벤트
+  document.getElementById('gallery-close').addEventListener('click', closeGallery);
+  document.getElementById('gallery-next').addEventListener('click', nextPhoto);
+  document.getElementById('gallery-prev').addEventListener('click', prevPhoto);
 
-        // 팝업 배경 클릭시 닫기
-        if (imagePopup) {
-            imagePopup.addEventListener('click', (e) => {
-                if (e.target === imagePopup) {
-                    window.closePopup();
-                }
-            });
-        }
-
-        // 스와이프 기능
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        if (imagePopup) {
-            imagePopup.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            });
-
-            imagePopup.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            });
-        }
-
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) {
-                // 왼쪽으로 스와이프 (다음)
-                window.nextSlide();
-            }
-            if (touchEndX > touchStartX + 50) {
-                // 오른쪽으로 스와이프 (이전)
-                window.prevSlide();
-            }
-        }
-
-        // 팝업 이미지 길게 눌러서 다운로드
-        const downloadPopupHint = document.getElementById('downloadPopupHint');
-        let popupLongPressTimer;
-
-        if (popupImage) {
-            popupImage.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                if (downloadPopupHint) {
-                    downloadPopupHint.classList.add('show');
-                }
-                popupLongPressTimer = setTimeout(() => {
-                    downloadPopupImage();
-                }, 800);
-            });
-
-            popupImage.addEventListener('touchend', () => {
-                clearTimeout(popupLongPressTimer);
-                if (downloadPopupHint) {
-                    setTimeout(() => {
-                        downloadPopupHint.classList.remove('show');
-                    }, 300);
-                }
-            });
-
-            popupImage.addEventListener('touchmove', () => {
-                clearTimeout(popupLongPressTimer);
-                if (downloadPopupHint) {
-                    downloadPopupHint.classList.remove('show');
-                }
-            });
-
-            // PC에서 클릭으로도 다운로드
-            popupImage.addEventListener('click', (e) => {
-                e.stopPropagation();
-                downloadPopupImage();
-            });
-        }
-
-        function downloadPopupImage() {
-            const currentImageUrl = galleryImages[currentGallery][currentSlide];
-            const link = document.createElement('a');
-            link.href = currentImageUrl;
-            link.download = `MHE_Selfie_${currentGallery + 1}_${currentSlide + 1}.jpg`;
-            link.target = '_blank';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    </script>
+  // 페이지 처음 로드 시 렌더링
+  render();
+</script>
 </body>
 </html>
