@@ -400,7 +400,7 @@ function render() {
 
       div.appendChild(buttonsDiv);
 
-      // group-divider를 buttons 뒤에 추가, 단 James(마지막 그룹) 제외
+      // buttons 아래에 group-divider 추가, 단 마지막 그룹인 James 제외
       if (name !== arr[arr.length - 1]) {
         const divider = document.createElement('div');
         divider.className = 'group-divider';
@@ -409,90 +409,97 @@ function render() {
 
       mainContent.appendChild(div);
     });
-        }
+  } else if (activeTab === 'music') {
+    const musicDiv = document.createElement('div');
+    musicDiv.style.height = '100%';
+    musicDiv.style.display = 'flex';
+    musicDiv.style.alignItems = 'center';
+    musicDiv.style.justifyContent = 'center';
+    musicDiv.style.flexDirection = 'column';
+    musicDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">🎵</div><p style="color:#888;">음악 라이브러리</p>`;
+    mainContent.appendChild(musicDiv);
+  } else if (activeTab === 'sheet') {
+    const sheetDiv = document.createElement('div');
+    sheetDiv.style.height = '100%';
+    sheetDiv.style.display = 'flex';
+    sheetDiv.style.alignItems = 'center';
+    sheetDiv.style.justifyContent = 'center';
+    sheetDiv.style.flexDirection = 'column';
+    sheetDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">📄</div><p style="color:#888;">악보 보관함</p>`;
+    mainContent.appendChild(sheetDiv);
+  } else if (activeTab === 'info') {
+    const infoDiv = document.createElement('div');
+    infoDiv.style.height = '100%';
+    infoDiv.style.display = 'flex';
+    infoDiv.style.alignItems = 'center';
+    infoDiv.style.justifyContent = 'center';
+    infoDiv.style.flexDirection = 'column';
+    infoDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">ℹ️</div><p style="color:#888;">정보</p>`;
+    mainContent.appendChild(infoDiv);
+  }
+}
 
-        div.appendChild(buttonsDiv);
-        mainContent.appendChild(div);
-      };
-     else if (activeTab === 'music') {
-      const musicDiv = document.createElement('div');
-      musicDiv.style.height = '100%';
-      musicDiv.style.display = 'flex';
-      musicDiv.style.alignItems = 'center';
-      musicDiv.style.justifyContent = 'center';
-      musicDiv.style.flexDirection = 'column';
-      musicDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">🎵</div><p style="color:#888;">음악 라이브러리</p>`;
-      mainContent.appendChild(musicDiv);
-    } else if (activeTab === 'sheet') {
-      const sheetDiv = document.createElement('div');
-      sheetDiv.style.height = '100%';
-      sheetDiv.style.display = 'flex';
-      sheetDiv.style.alignItems = 'center';
-      sheetDiv.style.justifyContent = 'center';
-      sheetDiv.style.flexDirection = 'column';
-      sheetDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">📄</div><p style="color:#888;">악보 보관함</p>`;
-      mainContent.appendChild(sheetDiv);
-    } else if (activeTab === 'info') {
-      const infoDiv = document.createElement('div');
-      infoDiv.style.height = '100%';
-      infoDiv.style.display = 'flex';
-      infoDiv.style.alignItems = 'center';
-      infoDiv.style.justifyContent = 'center';
-      infoDiv.style.flexDirection = 'column';
-      infoDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">ℹ️</div><p style="color:#888;">정보</p>`;
-      mainContent.appendChild(infoDiv);
+function createPhotoButton(text, photos) {
+  const btn = document.createElement('button');
+  btn.className = 'photo-btn';
+  btn.textContent = text;
+  btn.addEventListener('click', () => openGallery(photos));
+  return btn;
+}
+
+function openGallery(photos) {
+  selectedPhotos = photos;
+  currentPhotoIndex = 0;
+  updateGallery();
+  galleryOverlay.style.display = 'flex';
+}
+
+function closeGallery() {
+  selectedPhotos = null;
+  currentPhotoIndex = 0;
+  galleryOverlay.style.display = 'none';
+}
+
+function updateGallery() {
+  if (!selectedPhotos) return;
+  galleryImg.src = selectedPhotos[currentPhotoIndex];
+  galleryCounter.textContent = `${currentPhotoIndex + 1} / ${selectedPhotos.length}`;
+}
+
+let clickDisabled = false;
+
+function nextPhoto() {
+  if (clickDisabled || !selectedPhotos) return;
+  clickDisabled = true;
+  currentPhotoIndex = (currentPhotoIndex + 1) % selectedPhotos.length;
+  updateGallery();
+  setTimeout(() => { clickDisabled = false; }, 300);
+}
+
+function prevPhoto() {
+  if (clickDisabled || !selectedPhotos) return;
+  clickDisabled = true;
+  currentPhotoIndex = (currentPhotoIndex - 1 + selectedPhotos.length) % selectedPhotos.length;
+  updateGallery();
+  setTimeout(() => { clickDisabled = false; }, 300);
+}
+
+// 이벤트 등록
+Object.values(tabButtons).forEach(button => {
+  button.addEventListener('click', () => {
+    const key = Object.keys(tabButtons).find(k => tabButtons[k] === button);
+    if (key) {
+      activeTab = key;
+      render();
     }
-  }
+  });
+});
 
-  function createPhotoButton(text, photos) {
-    const btn = document.createElement('button');
-    btn.className = 'photo-btn';
-    btn.textContent = text;
-    btn.addEventListener('click', () => openGallery(photos));
-    return btn;
-  }
+galleryCloseBtn.addEventListener('click', closeGallery);
+galleryPrevBtn.addEventListener('click', prevPhoto);
+galleryNextBtn.addEventListener('click', nextPhoto);
 
-  function openGallery(photos) {
-    selectedPhotos = photos;
-    currentPhotoIndex = 0;
-    updateGallery();
-    galleryOverlay.style.display = 'flex';
-  }
-
-  function closeGallery() {
-    selectedPhotos = null;
-    currentPhotoIndex = 0;
-    galleryOverlay.style.display = 'none';
-  }
-
-  function updateGallery() {
-    if (!selectedPhotos) return;
-    galleryImg.src = selectedPhotos[currentPhotoIndex];
-    galleryCounter.textContent = `${currentPhotoIndex + 1} / ${selectedPhotos.length}`;
-  }
-
-  function nextPhoto() {
-    if (clickDisabled || !selectedPhotos) return;
-    clickDisabled = true;
-    currentPhotoIndex = (currentPhotoIndex + 1) % selectedPhotos.length;
-    updateGallery();
-    setTimeout(() => { clickDisabled = false; }, 300);
-  }
-
-  function prevPhoto() {
-    if (clickDisabled || !selectedPhotos) return;
-    clickDisabled = true;
-    currentPhotoIndex = (currentPhotoIndex - 1 + selectedPhotos.length) % selectedPhotos.length;
-    updateGallery();
-    setTimeout(() => { clickDisabled = false; }, 300);
-  }
-
-  Object.values(tabButtons).forEach(button => {
-    button.addEventListener('click', () => {
-      const key = Object.keys(tabButtons).find(k => tabButtons[k] === button);
-      if (key) {
-        activeTab = key;
-        render();
+render();
       }
     });
   });
