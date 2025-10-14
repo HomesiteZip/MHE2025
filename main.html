@@ -4,11 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>MAYBE HAPPY ENDING</title>
+  <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
 <style>
   body, html {
     margin: 0; padding: 0; height: 100%;
     background-color: #fadbdf;
-    font-family: Arial, sans-serif;
+    font-family: 'SUIT', -apple-system, BlinkMacSystemFont, sans-serif; 
     overflow: hidden;
   }
   #app {
@@ -129,10 +130,10 @@
   width: 100%;
   max-width: 400px;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 10px;
   margin: 0 auto;
-  height: 100px;
+  height: auto;
 }
 
 .home-text {
@@ -393,7 +394,7 @@ function render() {
   // 4줄 텍스트
   var textDiv = document.createElement('div');
   textDiv.className = 'home-text';
-  textDiv.innerHTML = '어쩌면 해피엔딩 10주년을 기념하여<br>관객 여러분께 특별한 기억을 남기고 싶었습니다.<br><br>우린 행복해 질 수 있을까요?<br>어쩌면요.';
+  textDiv.innerHTML = '어쩌면 해피엔딩 10주년을 기념하여<br>여러분께 특별한 추억을 남기고 싶었습니다.<br><br>이곳에 간단한 소개글을<br>작성할 수 있습니다.';
   homeDiv.appendChild(textDiv);
   
   mainContent.appendChild(homeDiv);
