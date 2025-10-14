@@ -453,7 +453,7 @@ function render() {
     musicDiv.style.alignItems = 'center';
     musicDiv.style.justifyContent = 'center';
     musicDiv.style.flexDirection = 'column';
-    musicDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">🎵</div><p style="color:#888;">음악 라이브러리</p>`;
+    musicDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">🎵</div><p style="color:#888;">피아노 연주</p>`;
     mainContent.appendChild(musicDiv);
   } else if (activeTab === 'sheet') {
     const sheetDiv = document.createElement('div');
@@ -462,7 +462,7 @@ function render() {
     sheetDiv.style.alignItems = 'center';
     sheetDiv.style.justifyContent = 'center';
     sheetDiv.style.flexDirection = 'column';
-    sheetDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">📄</div><p style="color:#888;">악보 보관함</p>`;
+    sheetDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">📄</div><p style="color:#888;">연습실 한 소절</p>`;
     mainContent.appendChild(sheetDiv);
   } else if (activeTab === 'info') {
     const infoDiv = document.createElement('div');
@@ -471,7 +471,7 @@ function render() {
     infoDiv.style.alignItems = 'center';
     infoDiv.style.justifyContent = 'center';
     infoDiv.style.flexDirection = 'column';
-    infoDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">ℹ️</div><p style="color:#888;">정보</p>`;
+    infoDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">ℹ️</div><p style="color:#888;">공연 정보<br>좌석안내, 오시는길 등</p>`;
     mainContent.appendChild(infoDiv);
   }
 }
