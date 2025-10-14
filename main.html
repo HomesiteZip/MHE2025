@@ -113,7 +113,7 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   overflow-y: auto;
 }
   .home-square-img {
@@ -379,21 +379,21 @@ function render() {
   // 정사각형 이미지
   var squareImg = document.createElement('img');
   squareImg.className = 'home-square-img';
-  squareImg.src = 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=600&q=80';
+  squareImg.src = 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/f43f99319484470f31ff7a34762e3cdce018d0a5/main-Vinyl-LP.webp';
   squareImg.alt = 'Square Image';
   homeDiv.appendChild(squareImg);
   
   // 직사각형 이미지
   var rectImg = document.createElement('img');
   rectImg.className = 'home-rect-img';
-  rectImg.src = 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80';
+  rectImg.src = 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/f43f99319484470f31ff7a34762e3cdce018d0a5/main-logo.webp';
   rectImg.alt = 'Rectangle Image';
   homeDiv.appendChild(rectImg);
   
   // 4줄 텍스트
   var textDiv = document.createElement('div');
   textDiv.className = 'home-text';
-  textDiv.innerHTML = '첫 번째 줄 텍스트입니다.<br>두 번째 줄 텍스트입니다.<br><br>세 번째 줄 텍스트입니다.<br>네 번째 줄 텍스트입니다.';
+  textDiv.innerHTML = '어쩌면 해피엔딩 10주년을 기념하여<br>관객 여러분께 특별한 기억을 남기고 싶었습니다.<br><br>우린 행복해 질 수 있을까요?<br>어쩌면요.';
   homeDiv.appendChild(textDiv);
   
   mainContent.appendChild(homeDiv);
