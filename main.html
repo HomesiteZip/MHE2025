@@ -458,51 +458,66 @@ function renderPhotos() {
   return fragment;
 }
 
+function createAudioPlayerWithDownload(src, label) {
+  const container = document.createElement('div');
+  container.style.display = 'flex';
+  container.style.alignItems = 'center';
+  container.style.gap = '12px';
+  container.style.width = '100%';
+  container.style.maxWidth = '320px';
+  container.style.marginBottom = '12px';
+
+  const audio = document.createElement('audio');
+  audio.controls = true;
+  audio.src = src;
+  audio.style.flexGrow = '1';
+
+  const downloadLink = document.createElement('a');
+  downloadLink.href = src;
+  downloadLink.download = '';  // 다운로드 속성
+  downloadLink.textContent = label || '다운로드';
+  downloadLink.style.textDecoration = 'none';
+  downloadLink.style.color = '#2D3887';
+  downloadLink.style.fontWeight = 'bold';
+  downloadLink.style.cursor = 'pointer';
+
+  container.appendChild(audio);
+  container.appendChild(downloadLink);
+
+  return container;
+}
+
 function renderMusic() {
   const musicDiv = document.createElement('div');
   musicDiv.style.height = '100%';
   musicDiv.style.display = 'flex';
-  musicDiv.style.alignItems = 'center';
   musicDiv.style.flexDirection = 'column';
-  musicDiv.style.padding = '30px';
+  musicDiv.style.alignItems = 'center';
+  musicDiv.style.justifyContent = 'center';
   musicDiv.style.gap = '20px';
+  musicDiv.style.padding = '20px';
+
+  const icon = document.createElement('div');
+  icon.style.fontSize = '64px';
+  icon.style.color = '#ccc';
+  icon.style.marginBottom = '16px';
+  icon.textContent = '🎵';
 
   const text = document.createElement('p');
-  text.style.color = '#2D3887';
-  text.style.fontSize = '0.95rem';
-  text.style.fontWeight = 'bold';
-  text.style.marginBottom = '2px';
-  text.textContent = '000제임스의 피아노 연주';
-
-// 첫 번째 오디오 재생기
-  const audio1 = document.createElement('audio');
-  audio1.controls = true;
-  audio1.src = 'https://github.com/HomesiteZip/MHE2025/blob/main/sample1.mp3'; // 첫 번째 MP3 경로
-  audio1.style.width = '100%';
-  audio1.style.maxWidth = '320px';
-
-  // 두 번째 오디오 재생기
-  const audio2 = document.createElement('audio');
-  audio2.controls = true;
-  audio2.src = 'path/to/music2.mp3'; // 두 번째 MP3 경로
-  audio2.style.width = '100%';
-  audio2.style.maxWidth = '320px';
-
-  // 세 번째 오디오 재생기
-  const audio3 = document.createElement('audio');
-  audio3.controls = true;
-  audio3.src = 'path/to/music3.mp3'; // 세 번째 MP3 경로
-  audio3.style.width = '100%';
-  audio3.style.maxWidth = '320px';
+  text.style.color = '#888';
+  text.textContent = '피아노 연주';
 
   musicDiv.appendChild(icon);
   musicDiv.appendChild(text);
-  musicDiv.appendChild(audio1);
-  musicDiv.appendChild(audio2);
-  musicDiv.appendChild(audio3);
-  
+
+  // 세 개의 오디오 플레이어 + 다운로드 버튼 생성
+  musicDiv.appendChild(createAudioPlayerWithDownload('path/to/music1.mp3', '다운로드'));
+  musicDiv.appendChild(createAudioPlayerWithDownload('path/to/music2.mp3', '다운로드'));
+  musicDiv.appendChild(createAudioPlayerWithDownload('path/to/music3.mp3', '다운로드'));
+
   return musicDiv;
 }
+
 
 function renderSheet() {
   const sheetDiv = document.createElement('div');
