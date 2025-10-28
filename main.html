@@ -422,7 +422,6 @@ function renderPerson(person, isLast) {
   const buttonsDiv = document.createElement('div');
   buttonsDiv.className = 'buttons center';
 
-  // 클레어만 3/2분할 표시, 나머진 그대로
   if (person.name === 'Claire') {
     person.buttons.slice(0, 3).forEach((btnText, idx) => {
       buttonsDiv.appendChild(createPhotoButton(btnText, person.buttonsPhotos[idx]));
@@ -465,7 +464,7 @@ function renderMusic() {
   musicDiv.style.alignItems = 'center';
   musicDiv.style.justifyContent = 'center';
   musicDiv.style.flexDirection = 'column';
-  musicDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">🎵</div><p style="color:#888;">피아노 연주</p>`;
+  musicDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">🎹</div><p style="color:#888;">제임스의 피아노 연주</p>`;
   return musicDiv;
 }
 
@@ -476,7 +475,7 @@ function renderSheet() {
   sheetDiv.style.alignItems = 'center';
   sheetDiv.style.justifyContent = 'center';
   sheetDiv.style.flexDirection = 'column';
-  sheetDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">📄</div><p style="color:#888;">연습실 한 소절</p>`;
+  sheetDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">🎵</div><p style="color:#888;">요새 나를 행복하게 하는<br>플레이리스트</p>`;
   return sheetDiv;
 }
 
