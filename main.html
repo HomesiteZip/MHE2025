@@ -465,7 +465,28 @@ function renderMusic() {
   musicDiv.style.alignItems = 'center';
   musicDiv.style.justifyContent = 'center';
   musicDiv.style.flexDirection = 'column';
-  musicDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">🎹</div><p style="color:#888;">제임스의 피아노 연주</p>`;
+  musicDiv.style.gap = '20px';
+
+  const icon = document.createElement('div');
+  icon.style.fontSize = '64px';
+  icon.style.color = '#ccc';
+  icon.style.marginBottom = '16px';
+  icon.textContent = '🎵';
+
+  const text = document.createElement('p');
+  text.style.color = '#888';
+  text.textContent = '피아노 연주';
+
+  const audio = document.createElement('audio');
+  audio.controls = true; // 재생바 및 컨트롤 표시
+  audio.src = 'path/to/your-piano-audio.mp3'; // 실제 mp3 파일 경로로 변경
+  audio.style.width = '100%';
+  audio.style.maxWidth = '320px';
+
+  musicDiv.appendChild(icon);
+  musicDiv.appendChild(text);
+  musicDiv.appendChild(audio);
+
   return musicDiv;
 }
 
@@ -550,7 +571,7 @@ function renderInfo() {
   infoWrapper.appendChild(addrTitle);
 
   const addr = document.createElement('div');
-  addr.textContent = '03129 서울특별시 종로구 종로33길 15';
+  addr.innerHTML = '03129 서울특별시 종로구 종로33길 15';
   addr.style.fontSize = '0.95rem';
   addr.style.marginBottom = '18px';
   infoWrapper.appendChild(addr);
@@ -564,7 +585,7 @@ function renderInfo() {
   infoWrapper.appendChild(wayTitle);
 
   const way = document.createElement('div');
-  way.textContent = '지하철 1호선 종로 5가역 1번 출구,<br>오가약국 골목으로 30m';
+  way.innerHTML = '지하철 1호선 종로 5가역 1번 출구,<br>오가약국 골목으로 30m';
   way.style.fontSize = '0.95rem';
   way.style.marginBottom = '18px';
   infoWrapper.appendChild(way);
@@ -578,14 +599,14 @@ function renderInfo() {
   infoWrapper.appendChild(parkTitle);
 
   const park = document.createElement('div');
-  park.textContent = '당일 관람고객에 한해 4시간 5,000원,<br>주차권 제공,초과 시 10분당 1,000원';
+  park.innerHTML = '당일 관람고객에 한해 4시간 5,000원,<br>주차권 제공,초과 시 10분당 1,000원';
   park.style.fontSize = '0.95rem';
   park.style.marginBottom = '8px';
   infoWrapper.appendChild(park);
 
   // 주의 안내 (작은 회색)
   const note = document.createElement('div');
-  note.textContent = '※ 주차장이 협소하고 공연장 주변 교통이 혼잡하오니<br>가급적 대중교통을 이용해 주시기 바랍니다.';
+  note.innerHTML = '※ 주차장이 협소하고 공연장 주변 교통이 혼잡하오니<br>가급적 대중교통을 이용해 주시기 바랍니다.';
   note.style.fontSize = '0.85rem';
   note.style.fontWeight = 'bold';
   note.style.color = '#888';
