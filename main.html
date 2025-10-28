@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="robots" content="noindex, nofollow" />
 <title>MAYBE HAPPY ENDING</title>
 <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
 <style>
@@ -480,14 +481,55 @@ function renderSheet() {
 }
 
 function renderInfo() {
-  const infoDiv = document.createElement('div');
-  infoDiv.style.height = '100%';
-  infoDiv.style.display = 'flex';
-  infoDiv.style.alignItems = 'center';
-  infoDiv.style.justifyContent = 'center';
-  infoDiv.style.flexDirection = 'column';
-  infoDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">ℹ️</div><p style="color:#888;">공연 정보<br>좌석안내, 오시는길 등</p>`;
-  return infoDiv;
+  const container = document.createElement('div');
+  container.style.height = '100%';
+  container.style.display = 'flex';
+  container.style.flexDirection = 'column';
+  container.style.justifyContent = 'center';
+  container.style.alignItems = 'center';
+  container.style.gap = '20px';
+
+  // 공통 버튼 스타일
+  const buttonStyle = `
+    min-width: 140px;
+    padding: 14px 24px;
+    border-radius: 30px;
+    border: none;
+    background-color: #2D3887;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+  `;
+
+  // 공연 정보 버튼
+  const infoBtn = document.createElement('a');
+  infoBtn.href = 'https://www.ticketlink.co.kr/product/58765';
+  infoBtn.textContent = '공연 정보';
+  infoBtn.style.cssText = buttonStyle;
+  infoBtn.target = '_blank';
+  infoBtn.rel = 'noopener noreferrer';
+  infoBtn.addEventListener('mouseenter', () => infoBtn.style.backgroundColor = '#5059c9');
+  infoBtn.addEventListener('mouseleave', () => infoBtn.style.backgroundColor = '#2D3887');
+
+  // 오시는 길 버튼
+  const mapBtn = document.createElement('a');
+  mapBtn.href = 'https://map.naver.com/p/directions/-/14137708.3352733,4519097.9346787,두산아트센터 연강홀,13412903,PLACE_POI/-/transit?c=15.00,0,0,0,dh';
+  mapBtn.textContent = '오시는 길';
+  mapBtn.style.cssText = buttonStyle;
+  mapBtn.target = '_blank';
+  mapBtn.rel = 'noopener noreferrer';
+  mapBtn.addEventListener('mouseenter', () => mapBtn.style.backgroundColor = '#5059c9');
+  mapBtn.addEventListener('mouseleave', () => mapBtn.style.backgroundColor = '#2D3887');
+
+  container.appendChild(infoBtn);
+  container.appendChild(mapBtn);
+
+  return container;
 }
 
 function createPhotoButton(text, photos) {
