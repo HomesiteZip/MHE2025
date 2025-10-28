@@ -485,13 +485,13 @@ function renderInfo() {
   container.style.height = '100%';
   container.style.display = 'flex';
   container.style.flexDirection = 'column';
-  container.style.justifyContent = 'center';
   container.style.alignItems = 'center';
+  container.style.padding = '30px';
   container.style.gap = '20px';
 
   // 공통 버튼 스타일
   const buttonStyle = `
-    min-width: 140px;
+    min-width: 240px;
     padding: 14px 24px;
     border-radius: 30px;
     border: none;
@@ -530,13 +530,13 @@ function renderInfo() {
   container.appendChild(mapBtn);
 
   const infoWrapper = document.createElement('div');
-  infoWrapper.style.marginTop = '36px';
+  infoWrapper.style.marginTop = '10px';
   infoWrapper.style.textAlign = 'center';
 
   // 타이틀
   const title = document.createElement('div');
   title.textContent = '두산아트센터 연강홀';
-  title.style.fontSize = '1.18rem';
+  title.style.fontSize = '1.5rem';
   title.style.fontWeight = 'bold';
   title.style.marginBottom = '14px';
   infoWrapper.appendChild(title);
@@ -544,43 +544,50 @@ function renderInfo() {
   // 주소
   const addrTitle = document.createElement('div');
   addrTitle.textContent = '주소';
+  addrTitle.style.fontSize = '0.95rem';
   addrTitle.style.fontWeight = 'bold';
   addrTitle.style.marginBottom = '2px';
   infoWrapper.appendChild(addrTitle);
 
   const addr = document.createElement('div');
   addr.textContent = '03129 서울특별시 종로구 종로33길 15';
+  addr.style.fontSize = '0.95rem';
   addr.style.marginBottom = '18px';
   infoWrapper.appendChild(addr);
 
   // 오시는 길
   const wayTitle = document.createElement('div');
   wayTitle.textContent = '오시는 길';
+  wayTitle.style.fontSize = '0.95rem';
   wayTitle.style.fontWeight = 'bold';
   wayTitle.style.marginBottom = '2px';
   infoWrapper.appendChild(wayTitle);
 
   const way = document.createElement('div');
-  way.textContent = '지하철 1호선 종로 5가역 1번 출구, 오가약국 골목으로 30m';
+  way.textContent = '지하철 1호선 종로 5가역 1번 출구,<br>오가약국 골목으로 30m';
+  way.style.fontSize = '0.95rem';
   way.style.marginBottom = '18px';
   infoWrapper.appendChild(way);
   
   // 주차 안내
   const parkTitle = document.createElement('div');
   parkTitle.textContent = '주차 안내';
+  parkTitle.style.fontSize = '0.95rem';
   parkTitle.style.fontWeight = 'bold';
   parkTitle.style.marginBottom = '2px';
   infoWrapper.appendChild(parkTitle);
 
   const park = document.createElement('div');
-  park.textContent = '당일 관람고객에 한해 4시간 5,000원, 주차권 제공,초과 시 10분당 1,000원';
+  park.textContent = '당일 관람고객에 한해 4시간 5,000원,<br>주차권 제공,초과 시 10분당 1,000원';
+  park.style.fontSize = '0.95rem';
   park.style.marginBottom = '8px';
   infoWrapper.appendChild(park);
 
   // 주의 안내 (작은 회색)
   const note = document.createElement('div');
-  note.textContent = '※ 주차장이 협소하고 공연장 주변 교통이 혼잡하오니 가급적 대중교통을 이용해 주시기 바랍니다. 주차 및 교통난으로 인해 당일 관람이 불가하거나 관람을 포기나 경우 예매 티켓의 환불/취소/변경은 불가합니다.';
-  note.style.fontSize = '0.89rem';
+  note.textContent = '※ 주차장이 협소하고 공연장 주변 교통이 혼잡하오니<br>가급적 대중교통을 이용해 주시기 바랍니다.';
+  note.style.fontSize = '0.85rem';
+  note.style.fontWeight = 'bold';
   note.style.color = '#888';
   note.style.lineHeight = '1.4';
   note.style.marginTop = '8px';
