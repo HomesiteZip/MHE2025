@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>MAYBE HAPPY ENDING</title>
-  <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
 <style>
   body, html {
     margin: 0; padding: 0; height: 100%;
@@ -110,40 +110,39 @@
     background-color: #2D3887;
   }
   .tab-home {
-  height: 100%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  overflow-y: auto;
-}
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+  }
   .home-square-img {
-  width: 100%;
-  max-width: 400px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 10px;
-  margin: 0 auto;
-}
-
-.home-rect-img {
-  width: 100%;
-  max-width: 400px;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
-  border-radius: 10px;
-  margin: 0 auto;
-  height: 70px;
-}
-
-.home-text {
-  color: #2D3887;
-  font-size: 0.95rem;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: center;
-  padding: 0 0 70px;
-}
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 0 auto;
+  }
+  .home-rect-img {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    border-radius: 10px;
+    margin: 0 auto;
+    height: 70px;
+  }
+  .home-text {
+    color: #2D3887;
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.5;
+    text-align: center;
+    padding: 0 0 80px;
+    margin-bottom: 60px;
+  }
   .person {
     max-width: 100%;
     padding: 0 12px;
@@ -151,12 +150,6 @@
   }
   .person.oliver {
     margin-top: 50px;
-  }
-  .person.claire {
-    margin-bottom: 0;
-  }
-  .person.james {
-    margin-bottom: 0;
   }
   .person-header {
     display: flex;
@@ -285,83 +278,80 @@
 </div>
 
 <script>
-  const mainContent = document.getElementById('main-content');
-  const galleryOverlay = document.getElementById('gallery-overlay');
-  const galleryImg = document.getElementById('gallery-img');
-  const galleryCounter = document.getElementById('gallery-counter');
-  const tabButtons = {
-    home: document.getElementById('tab-home-btn'),
-    photos: document.getElementById('tab-photos-btn'),
-    music: document.getElementById('tab-music-btn'),
-    sheet: document.getElementById('tab-sheet-btn'),
-    info: document.getElementById('tab-info-btn'),
-  };
-  const galleryCloseBtn = document.getElementById('gallery-close');
-  const galleryPrevBtn = document.getElementById('gallery-prev');
-  const galleryNextBtn = document.getElementById('gallery-next');
+const mainContent = document.getElementById('main-content');
+const galleryOverlay = document.getElementById('gallery-overlay');
+const galleryImg = document.getElementById('gallery-img');
+const galleryCounter = document.getElementById('gallery-counter');
+const tabButtons = {
+  home: document.getElementById('tab-home-btn'),
+  photos: document.getElementById('tab-photos-btn'),
+  music: document.getElementById('tab-music-btn'),
+  sheet: document.getElementById('tab-sheet-btn'),
+  info: document.getElementById('tab-info-btn'),
+};
+const galleryCloseBtn = document.getElementById('gallery-close');
+const galleryPrevBtn = document.getElementById('gallery-prev');
+const galleryNextBtn = document.getElementById('gallery-next');
 
-  const photoData = [
-    { 
-      name: 'Oliver',
-      emoji: '😊',
-      type: 'text',
-      buttons: ['김재범', '신성민', '전성우', '정휘'],
-      buttonsPhotos: [
-        ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%9E%AC%EB%B2%94_%EC%98%AC%EB%A6%AC%EB%B2%841.webp',
-          'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%9E%AC%EB%B2%94_%EC%98%AC%EB%A6%AC%EB%B2%842.webp',
-          'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%9E%AC%EB%B2%94_%EC%98%AC%EB%A6%AC%EB%B2%843.webp'],
-        ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B1%EB%AF%BC_%EC%98%AC%EB%A6%AC%EB%B2%841.webp',
-          'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B1%EB%AF%BC_%EC%98%AC%EB%A6%AC%EB%B2%842.webp',
-          'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B1%EB%AF%BC_%EC%98%AC%EB%A6%AC%EB%B2%843.webp'],
-        ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B1%EC%9A%B0_%EC%98%AC%EB%A6%AC%EB%B2%841.webp',
-          'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B1%EC%9A%B0_%EC%98%AC%EB%A6%AC%EB%B2%842.webp',
-          'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B1%EC%9A%B0_%EC%98%AC%EB%A6%AC%EB%B2%843.webp'],
-        ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A0%95%ED%9C%98_%EC%98%AC%EB%A6%AC%EB%B2%841.webp',
-          'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A0%95%ED%9C%98_%EC%98%AC%EB%A6%AC%EB%B2%842.webp',
-          'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A0%95%ED%9C%98_%EC%98%AC%EB%A6%AC%EB%B2%843.webp'],
-      ],
-    },
-    {
-      name: 'Claire',
-      emoji: '😄',
-      type: 'text',
-      buttons: ['전미도', '최수진', '박지연', '박진주', '방민아'],
-      buttonsPhotos: [
-        ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EB%AF%B8%EB%8F%84_%ED%81%B4%EB%A0%88%EC%96%B41.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EB%AF%B8%EB%8F%84_%ED%81%B4%EB%A0%88%EC%96%B42.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EB%AF%B8%EB%8F%84_%ED%81%B4%EB%A0%88%EC%96%B43.webp'],
-        ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%88%98%EC%A7%84_%ED%81%B4%EB%A0%88%EC%96%B41.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%88%98%EC%A7%84_%ED%81%B4%EB%A0%88%EC%96%B42.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%88%98%EC%A7%84_%ED%81%B4%EB%A0%88%EC%96%B43.webp'],
-        ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A7%80%EC%97%B0_%ED%81%B4%EB%A0%88%EC%96%B41.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A7%80%EC%97%B0_%ED%81%B4%EB%A0%88%EC%96%B42.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A7%80%EC%97%B0_%ED%81%B4%EB%A0%88%EC%96%B43.webp'],
-        ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A7%84%EC%A3%BC_%ED%81%B4%EB%A0%88%EC%96%B41.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A7%84%EC%A3%BC_%ED%81%B4%EB%A0%88%EC%96%B42.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A7%84%EC%A3%BC_%ED%81%B4%EB%A0%88%EC%96%B43.webp'],
-        ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EB%AF%BC%EC%95%84_%ED%81%B4%EB%A0%88%EC%96%B41.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EB%AF%BC%EC%95%84_%ED%81%B4%EB%A0%88%EC%96%B42.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EB%AF%BC%EC%95%84_%ED%81%B4%EB%A0%88%EC%96%B43.webp'],
-      ],
-    },
-    {
-      name: 'James',
-      emoji: '🙂',
-      type: 'text',
-      buttons: ['이시안', '고훈정', '박세훈'],
-      buttonsPhotos: [
-        ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%8B%9C%EC%95%88_%EC%A0%9C%EC%9E%84%EC%8A%A41.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%8B%9C%EC%95%88_%EC%A0%9C%EC%9E%84%EC%8A%A42.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%8B%9C%EC%95%88_%EC%A0%9C%EC%9E%84%EC%8A%A43.webp'],
-        ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%ED%9B%88%EC%A0%95_%EC%A0%9C%EC%9E%84%EC%8A%A41.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%ED%9B%88%EC%A0%95_%EC%A0%9C%EC%9E%84%EC%8A%A42.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%ED%9B%88%EC%A0%95_%EC%A0%9C%EC%9E%84%EC%8A%A43.webp'],
-        ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B8%ED%9B%88_%EC%A0%9C%EC%9E%84%EC%8A%A41.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B8%ED%9B%88_%EC%A0%9C%EC%9E%84%EC%8A%A42.webp',
-         'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B8%ED%9B%88_%EC%A0%9C%EC%9E%84%EC%8A%A43.webp'],
-      ],
-    },
-  ];
+const photoData = [
+  { 
+    name: 'Oliver',
+    emoji: '😊',
+    buttons: ['김재범', '신성민', '전성우', '정휘'],
+    buttonsPhotos: [
+      ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%9E%AC%EB%B2%94_%EC%98%AC%EB%A6%AC%EB%B2%841.webp',
+        'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%9E%AC%EB%B2%94_%EC%98%AC%EB%A6%AC%EB%B2%842.webp',
+        'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%9E%AC%EB%B2%94_%EC%98%AC%EB%A6%AC%EB%B2%843.webp'],
+      ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B1%EB%AF%BC_%EC%98%AC%EB%A6%AC%EB%B2%841.webp',
+        'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B1%EB%AF%BC_%EC%98%AC%EB%A6%AC%EB%B2%842.webp',
+        'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B1%EB%AF%BC_%EC%98%AC%EB%A6%AC%EB%B2%843.webp'],
+      ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B1%EC%9A%B0_%EC%98%AC%EB%A6%AC%EB%B2%841.webp',
+        'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B1%EC%9A%B0_%EC%98%AC%EB%A6%AC%EB%B2%842.webp',
+        'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B1%EC%9A%B0_%EC%98%AC%EB%A6%AC%EB%B2%843.webp'],
+      ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A0%95%ED%9C%98_%EC%98%AC%EB%A6%AC%EB%B2%841.webp',
+        'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A0%95%ED%9C%98_%EC%98%AC%EB%A6%AC%EB%B2%842.webp',
+        'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A0%95%ED%9C%98_%EC%98%AC%EB%A6%AC%EB%B2%843.webp'],
+    ],
+  },
+  {
+    name: 'Claire',
+    emoji: '😄',
+    buttons: ['전미도', '최수진', '박지연', '박진주', '방민아'],
+    buttonsPhotos: [
+      ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EB%AF%B8%EB%8F%84_%ED%81%B4%EB%A0%88%EC%96%B41.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EB%AF%B8%EB%8F%84_%ED%81%B4%EB%A0%88%EC%96%B42.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EB%AF%B8%EB%8F%84_%ED%81%B4%EB%A0%88%EC%96%B43.webp'],
+      ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%88%98%EC%A7%84_%ED%81%B4%EB%A0%88%EC%96%B41.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%88%98%EC%A7%84_%ED%81%B4%EB%A0%88%EC%96%B42.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%88%98%EC%A7%84_%ED%81%B4%EB%A0%88%EC%96%B43.webp'],
+      ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A7%80%EC%97%B0_%ED%81%B4%EB%A0%88%EC%96%B41.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A7%80%EC%97%B0_%ED%81%B4%EB%A0%88%EC%96%B42.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A7%80%EC%97%B0_%ED%81%B4%EB%A0%88%EC%96%B43.webp'],
+      ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A7%84%EC%A3%BC_%ED%81%B4%EB%A0%88%EC%96%B41.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A7%84%EC%A3%BC_%ED%81%B4%EB%A0%88%EC%96%B42.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%A7%84%EC%A3%BC_%ED%81%B4%EB%A0%88%EC%96%B43.webp'],
+      ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EB%AF%BC%EC%95%84_%ED%81%B4%EB%A0%88%EC%96%B41.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EB%AF%BC%EC%95%84_%ED%81%B4%EB%A0%88%EC%96%B42.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EB%AF%BC%EC%95%84_%ED%81%B4%EB%A0%88%EC%96%B43.webp'],
+    ],
+  },
+  {
+    name: 'James',
+    emoji: '🙂',
+    buttons: ['이시안', '고훈정', '박세훈'],
+    buttonsPhotos: [
+      ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%8B%9C%EC%95%88_%EC%A0%9C%EC%9E%84%EC%8A%A41.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%8B%9C%EC%95%88_%EC%A0%9C%EC%9E%84%EC%8A%A42.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%8B%9C%EC%95%88_%EC%A0%9C%EC%9E%84%EC%8A%A43.webp'],
+      ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%ED%9B%88%EC%A0%95_%EC%A0%9C%EC%9E%84%EC%8A%A41.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%ED%9B%88%EC%A0%95_%EC%A0%9C%EC%9E%84%EC%8A%A42.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%ED%9B%88%EC%A0%95_%EC%A0%9C%EC%9E%84%EC%8A%A43.webp'],
+      ['https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B8%ED%9B%88_%EC%A0%9C%EC%9E%84%EC%8A%A41.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B8%ED%9B%88_%EC%A0%9C%EC%9E%84%EC%8A%A42.webp',
+      'https://raw.githubusercontent.com/HomesiteZip/MHE2025/56ee5887654ef38164e338bfd34a6f1543f6e619/%EC%84%B8%ED%9B%88_%EC%A0%9C%EC%9E%84%EC%8A%A43.webp'],
+    ],
+  },
+];
 
 let activeTab = 'home';
 let selectedPhotos = null;
@@ -369,112 +359,136 @@ let currentPhotoIndex = 0;
 let clickDisabled = false;
 
 function render() {
-  Object.values(tabButtons).forEach(button => button.classList.remove('active'));
+  Object.values(tabButtons).forEach(btn => btn.classList.remove('active'));
   tabButtons[activeTab].classList.add('active');
 
   mainContent.innerHTML = '';
+  const fragment = document.createDocumentFragment();
 
-  if (activeTab === 'home') {
-  var homeDiv = document.createElement('div');
+  switch (activeTab) {
+    case 'home':
+      fragment.appendChild(renderHome());
+      break;
+    case 'photos':
+      fragment.appendChild(renderPhotos());
+      break;
+    case 'music':
+      fragment.appendChild(renderMusic());
+      break;
+    case 'sheet':
+      fragment.appendChild(renderSheet());
+      break;
+    case 'info':
+      fragment.appendChild(renderInfo());
+      break;
+  }
+  mainContent.appendChild(fragment);
+}
+
+function renderHome() {
+  const homeDiv = document.createElement('div');
   homeDiv.className = 'tab-home';
-  
-  // 정사각형 이미지
-  var squareImg = document.createElement('img');
+
+  const squareImg = document.createElement('img');
   squareImg.className = 'home-square-img';
   squareImg.src = 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/f43f99319484470f31ff7a34762e3cdce018d0a5/main-Vinyl-LP.webp';
   squareImg.alt = 'Square Image';
   homeDiv.appendChild(squareImg);
-  
-  // 직사각형 이미지
-  var rectImg = document.createElement('img');
+
+  const rectImg = document.createElement('img');
   rectImg.className = 'home-rect-img';
   rectImg.src = 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/f43f99319484470f31ff7a34762e3cdce018d0a5/main-logo.webp';
   rectImg.alt = 'Rectangle Image';
   homeDiv.appendChild(rectImg);
-  
-  // 대문 텍스트
-  var textDiv = document.createElement('div');
+
+  const textDiv = document.createElement('div');
   textDiv.className = 'home-text';
   textDiv.innerHTML = '뮤지컬 어쩌면 해피엔딩 10주년을 맞아,<br>관객 여러분과 특별한 기억을 남기고 싶었습니다.<br><br>한국을 넘어, 세계가 사랑하는<br>창작 뮤지컬로 성장하기까지 함께해주신 모든 분들의<br>사랑과 응원에 진심으로 감사드립니다.<br><br>그 마음을 담아, 공연을 떠올릴<br>작은 흔적을 남깁니다.<br><br>“문을 두드려 줘서 고마웠어.”<br>“문을 열어 줘서 고마웠어.”<br>“천만에.”<br><br>';
   homeDiv.appendChild(textDiv);
-  
-  mainContent.appendChild(homeDiv);
-}else if (activeTab === 'photos') {
-    ['Oliver', 'Claire', 'James'].forEach((name, i, arr) => {
-      const person = photoData.find(p => p.name === name);
-      if (!person) return;
 
-      const div = document.createElement('div');
-      div.className = 'person ' + name.toLowerCase();
+  return homeDiv;
+}
 
-      if (name === 'Oliver') div.style.marginTop = '50px';
+function renderPerson(person, isLast) {
+  const div = document.createElement('div');
+  div.className = `person ${person.name.toLowerCase()}`;
+  if (person.name === 'Oliver') div.style.marginTop = '50px';
 
-      const header = document.createElement('div');
-      header.className = 'person-header center';
-      header.innerHTML = `<span class="emoji">${person.emoji}</span><span>${person.name}</span>`;
-      div.appendChild(header);
+  const header = document.createElement('div');
+  header.className = 'person-header center';
+  header.innerHTML = `<span class="emoji">${person.emoji}</span><span>${person.name}</span>`;
+  div.appendChild(header);
 
-      const buttonsDiv = document.createElement('div');
-      buttonsDiv.className = 'buttons center';
+  const buttonsDiv = document.createElement('div');
+  buttonsDiv.className = 'buttons center';
 
-      if (name === 'Claire') {
-        person.buttons.slice(0, 3).forEach((btnText, idx) => {
-          const btn = createPhotoButton(btnText, person.buttonsPhotos[idx]);
-          buttonsDiv.appendChild(btn);
-        });
-        const brNode = document.createElement('div');
-        brNode.style.flexBasis = '100%';
-        buttonsDiv.appendChild(brNode);
-        person.buttons.slice(3).forEach((btnText, idx) => {
-          const btn = createPhotoButton(btnText, person.buttonsPhotos[3 + idx]);
-          buttonsDiv.appendChild(btn);
-        });
-      } else {
-        person.buttons.forEach((btnText, idx) => {
-          const btn = createPhotoButton(btnText, person.buttonsPhotos[idx]);
-          buttonsDiv.appendChild(btn);
-        });
-      }
-
-      div.appendChild(buttonsDiv);
-
-      // buttons 아래에 group-divider 추가, 단 마지막 그룹인 James 제외
-      if (name !== arr[arr.length - 1]) {
-        const divider = document.createElement('div');
-        divider.className = 'group-divider';
-        div.appendChild(divider);
-      }
-
-      mainContent.appendChild(div);
+  // 클레어만 3/2분할 표시, 나머진 그대로
+  if (person.name === 'Claire') {
+    person.buttons.slice(0, 3).forEach((btnText, idx) => {
+      buttonsDiv.appendChild(createPhotoButton(btnText, person.buttonsPhotos[idx]));
     });
-  } else if (activeTab === 'music') {
-    const musicDiv = document.createElement('div');
-    musicDiv.style.height = '100%';
-    musicDiv.style.display = 'flex';
-    musicDiv.style.alignItems = 'center';
-    musicDiv.style.justifyContent = 'center';
-    musicDiv.style.flexDirection = 'column';
-    musicDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">🎵</div><p style="color:#888;">피아노 연주</p>`;
-    mainContent.appendChild(musicDiv);
-  } else if (activeTab === 'sheet') {
-    const sheetDiv = document.createElement('div');
-    sheetDiv.style.height = '100%';
-    sheetDiv.style.display = 'flex';
-    sheetDiv.style.alignItems = 'center';
-    sheetDiv.style.justifyContent = 'center';
-    sheetDiv.style.flexDirection = 'column';
-    sheetDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">📄</div><p style="color:#888;">연습실 한 소절</p>`;
-    mainContent.appendChild(sheetDiv);
-  } else if (activeTab === 'info') {
-    const infoDiv = document.createElement('div');
-    infoDiv.style.height = '100%';
-    infoDiv.style.display = 'flex';
-    infoDiv.style.alignItems = 'center';
-    infoDiv.style.justifyContent = 'center';
-    infoDiv.style.flexDirection = 'column';
-    infoDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">ℹ️</div><p style="color:#888;">공연 정보<br>좌석안내, 오시는길 등</p>`;
-    mainContent.appendChild(infoDiv);
+    const brNode = document.createElement('div');
+    brNode.style.flexBasis = '100%';
+    buttonsDiv.appendChild(brNode);
+    person.buttons.slice(3).forEach((btnText, idx) => {
+      buttonsDiv.appendChild(createPhotoButton(btnText, person.buttonsPhotos[3 + idx]));
+    });
+  } else {
+    person.buttons.forEach((btnText, idx) => {
+      buttonsDiv.appendChild(createPhotoButton(btnText, person.buttonsPhotos[idx]));
+    });
   }
+
+  div.appendChild(buttonsDiv);
+
+  if (!isLast) {
+    const divider = document.createElement('div');
+    divider.className = 'group-divider';
+    div.appendChild(divider);
+  }
+  return div;
+}
+
+function renderPhotos() {
+  const fragment = document.createDocumentFragment();
+  photoData.forEach((person, idx) => {
+    const isLast = idx === photoData.length - 1;
+    fragment.appendChild(renderPerson(person, isLast));
+  });
+  return fragment;
+}
+
+function renderMusic() {
+  const musicDiv = document.createElement('div');
+  musicDiv.style.height = '100%';
+  musicDiv.style.display = 'flex';
+  musicDiv.style.alignItems = 'center';
+  musicDiv.style.justifyContent = 'center';
+  musicDiv.style.flexDirection = 'column';
+  musicDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">🎵</div><p style="color:#888;">피아노 연주</p>`;
+  return musicDiv;
+}
+
+function renderSheet() {
+  const sheetDiv = document.createElement('div');
+  sheetDiv.style.height = '100%';
+  sheetDiv.style.display = 'flex';
+  sheetDiv.style.alignItems = 'center';
+  sheetDiv.style.justifyContent = 'center';
+  sheetDiv.style.flexDirection = 'column';
+  sheetDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">📄</div><p style="color:#888;">연습실 한 소절</p>`;
+  return sheetDiv;
+}
+
+function renderInfo() {
+  const infoDiv = document.createElement('div');
+  infoDiv.style.height = '100%';
+  infoDiv.style.display = 'flex';
+  infoDiv.style.alignItems = 'center';
+  infoDiv.style.justifyContent = 'center';
+  infoDiv.style.flexDirection = 'column';
+  infoDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">ℹ️</div><p style="color:#888;">공연 정보<br>좌석안내, 오시는길 등</p>`;
+  return infoDiv;
 }
 
 function createPhotoButton(text, photos) {
@@ -485,25 +499,23 @@ function createPhotoButton(text, photos) {
   return btn;
 }
 
+// 갤러리 관련
 function openGallery(photos) {
   selectedPhotos = photos;
   currentPhotoIndex = 0;
   updateGallery();
   galleryOverlay.style.display = 'flex';
 }
-
 function closeGallery() {
   selectedPhotos = null;
   currentPhotoIndex = 0;
   galleryOverlay.style.display = 'none';
 }
-
 function updateGallery() {
   if (!selectedPhotos) return;
   galleryImg.src = selectedPhotos[currentPhotoIndex];
   galleryCounter.textContent = `${currentPhotoIndex + 1} / ${selectedPhotos.length}`;
 }
-
 function nextPhoto() {
   if (clickDisabled || !selectedPhotos) return;
   clickDisabled = true;
@@ -511,7 +523,6 @@ function nextPhoto() {
   updateGallery();
   setTimeout(() => { clickDisabled = false; }, 300);
 }
-
 function prevPhoto() {
   if (clickDisabled || !selectedPhotos) return;
   clickDisabled = true;
@@ -520,7 +531,6 @@ function prevPhoto() {
   setTimeout(() => { clickDisabled = false; }, 300);
 }
 
-// 이벤트 등록
 Object.values(tabButtons).forEach(button => {
   button.addEventListener('click', () => {
     const key = Object.keys(tabButtons).find(k => tabButtons[k] === button);
@@ -530,12 +540,11 @@ Object.values(tabButtons).forEach(button => {
     }
   });
 });
+galleryCloseBtn.addEventListener('click', closeGallery);
+galleryPrevBtn.addEventListener('click', prevPhoto);
+galleryNextBtn.addEventListener('click', nextPhoto);
 
-  galleryCloseBtn.addEventListener('click', closeGallery);
-  galleryPrevBtn.addEventListener('click', prevPhoto);
-  galleryNextBtn.addEventListener('click', nextPhoto);
-
-  render();
+render();
 </script>
 </body>
 </html>
