@@ -396,7 +396,7 @@ function renderHome() {
 
   const squareImg = document.createElement('img');
   squareImg.className = 'home-square-img';
-  squareImg.src = 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/f43f99319484470f31ff7a34762e3cdce018d0a5/main-Vinyl-LP.webp';
+  squareImg.src = 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/refs/heads/main/lp.webp';
   squareImg.alt = 'Square Image';
   homeDiv.appendChild(squareImg);
 
@@ -544,11 +544,11 @@ function renderMusic() {
 
     const titleP = document.createElement('p');
     titleP.textContent = `${name}의 피아노 연주`;
-    titleP.style.alignItems = 'center';
     titleP.style.fontWeight = 'bold';
     titleP.style.fontSize = '1.1rem';
     titleP.style.color = '#2D3887';
     titleP.style.margin = '0';
+    titleP.style.textAlign = 'center';
 
     const player = createAudioPlayerWithDownload(src, '다운로드');
 
