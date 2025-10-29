@@ -419,7 +419,7 @@ const header = document.createElement('div');
 header.className = 'person-header center';
 
 const img = document.createElement('img');
-img.src = person.emojiImg;  // emojiImg 필드 사용
+img.src = person.emojiImg;  
 img.alt = person.name + ' 이모지';
 img.style.width = '36px';
 img.style.objectFit = 'cover';
@@ -526,11 +526,11 @@ function renderMusic() {
 
   const musicList = [
     { name: '이시안 제임스', src: 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/main/sample1.mp3' },
-    { name: '고훈정 제임스', src: 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/main/sample2.mp3' },
-    { name: '박세훈 제임스', src: 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/main/sample3.mp3' },
+    { name: '고훈정 제임스', src: 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/main/sample1.mp3' },
+    { name: '박세훈 제임스', src: 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/main/sample1.mp3' },
   ];
 
-  function createPlayGroup(num, src) {
+  function createPlayGroup(name, src) {
     const group = document.createElement('div');
     group.style.width = '100%';
     group.style.maxWidth = '360px';
