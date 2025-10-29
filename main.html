@@ -562,6 +562,8 @@ function renderMusic() {
   return musicDiv;
 }
 
+
+  // 말풍선 텍스트  
 function renderSheet() {
   const sheetDiv = document.createElement('div');
   sheetDiv.style.height = '100%';
@@ -569,9 +571,57 @@ function renderSheet() {
   sheetDiv.style.alignItems = 'center';
   sheetDiv.style.justifyContent = 'center';
   sheetDiv.style.flexDirection = 'column';
-  sheetDiv.innerHTML = `<div style="font-size:64px; color:#ccc; margin-bottom:16px;">🎵</div><p style="color:#888;">요새 나를 행복하게 하는<br>플레이리스트</p>`;
+
+  // 말풍선 컨테이너
+  const balloon = document.createElement('div');
+  balloon.style.position = 'relative';
+  balloon.style.marginTop = '30px';
+  balloon.style.textAlign = 'center';
+  balloon.style.fontSize = '1.15rem';
+  balloon.style.color = '#222';
+  balloon.style.lineHeight = '1.6';
+  balloon.style.maxWidth = '90%';
+  balloon.style.background = '#fff';
+  balloon.style.border = '2px solid #a8a8a8';
+  balloon.style.borderRadius = '18px';
+  balloon.style.padding = '24px 28px';
+  balloon.style.boxSizing = 'border-box';
+  balloon.style.boxShadow = '0 3px 16px rgba(0,0,0,0.04)';
+
+  // 말풍선 꼬리(왼쪽 아래)
+  const tail = document.createElement('div');
+  tail.style.position = 'absolute';
+  tail.style.left = '-18px';
+  tail.style.bottom = '24px';
+  tail.style.width = '0';
+  tail.style.height = '0';
+  tail.style.borderTop = '16px solid transparent';
+  tail.style.borderBottom = '16px solid transparent';
+  tail.style.borderRight = '22px solid #fff';
+  tail.style.zIndex = '1';
+
+  const tailBorder = document.createElement('div');
+  tailBorder.style.position = 'absolute';
+  tailBorder.style.left = '-22px';
+  tailBorder.style.bottom = '22px';
+  tailBorder.style.width = '0';
+  tailBorder.style.height = '0';
+  tailBorder.style.borderTop = '20px solid transparent';
+  tailBorder.style.borderBottom = '20px solid transparent';
+  tailBorder.style.borderRight = '26px solid #a8a8a8';
+  tailBorder.style.zIndex = '0';
+
+  // 말풍선 텍스트 콘텐츠
+  balloon.innerHTML = `<strong>김재범 배우</strong><br>aaaaaaaa글내용aaaaaaaa글내용`;
+
+  balloon.appendChild(tailBorder); // 테두리 꼬리 먼저 붙이고
+  balloon.appendChild(tail);       // 흰색 꼬리 겹쳐서 부드럽게
+  sheetDiv.appendChild(balloon);
+
   return sheetDiv;
 }
+
+
 
 function renderInfo() {
   const container = document.createElement('div');
