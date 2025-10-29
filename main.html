@@ -466,28 +466,30 @@ function createAudioPlayerWithDownload(src, label) {
   container.style.width = '100%';
   container.style.maxWidth = '320px';
   container.style.marginBottom = '12px';
+  container.style.fontFamily = "'SUIT'";
 
   const audio = document.createElement('audio');
   audio.controls = true;
   audio.src = src;
   audio.style.flexGrow = '1';
+  audio.style.fontFamily = "'SUIT'";
 
   const downloadLink = document.createElement('a');
   downloadLink.href = src;
   downloadLink.download = '';
-  downloadLink.textContent = label || '다운로드';
+  downloadLink.title = label || '다운로드';
   downloadLink.style.display = 'inline-flex';
   downloadLink.style.alignItems = 'center';
-  downloadLink.style.textDecoration = 'none';
-  downloadLink.style.color = '#2D3887';
-  downloadLink.style.fontWeight = 'bold';
   downloadLink.style.cursor = 'pointer';
+  downloadLink.style.textDecoration = 'none';
+  downloadLink.style.fontWeight = 'bold';
+  downloadLink.style.fontFamily = "'SUIT'";
 
-  downloadLink.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#2D3887" viewBox="0 0 24 24">
-      <path d="M5 20h14v-2H5v2zm7-18v12l4-4h-3V4h-2v6H8l4-4z"/>
-    </svg>
-  `;
+  const iconImg = document.createElement('img');
+  iconImg.src = 'https://img.icons8.com/?size=100&id=xfmO9wVKAyAR&format=png&color=2D3887';
+  iconImg.alt = '다운로드 아이콘';
+  iconImg.style.width = '22px';
+  iconImg.style.height = '22px';
 
   container.appendChild(audio);
   container.appendChild(downloadLink);
