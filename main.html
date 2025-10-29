@@ -398,7 +398,7 @@ function renderHome() {
 
   const rectImg = document.createElement('img');
   rectImg.className = 'home-rect-img';
-  rectImg.src = 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/f43f99319484470f31ff7a34762e3cdce018d0a5/main-logo.webp';
+  rectImg.src = 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/refs/heads/main/logo-04.webp';
   rectImg.alt = 'Rectangle Image';
   homeDiv.appendChild(rectImg);
 
@@ -573,13 +573,21 @@ function renderSheet() {
 
 function renderInfo() {
   const container = document.createElement('div');
-  container.style.height = '100%';
   container.style.display = 'flex';
   container.style.flexDirection = 'column';
   container.style.alignItems = 'center';
   container.style.padding = '30px';
   container.style.gap = '20px';
 
+  const logoImg = document.createElement('img');
+  logoImg.src = 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/refs/heads/main/logo-03.webp';
+  logoImg.alt = '10주년 로고';
+  logoImg.style.width = '150px'; 
+  logoImg.style.height = 'auto';
+  logoImg.style.marginBottom = '18px'; 
+
+  container.appendChild(logoImg);
+  
   // 공통 버튼 스타일
   const buttonStyle = `
     min-width: 240px;
@@ -597,7 +605,6 @@ function renderInfo() {
     transition: background-color 0.3s;
   `;
 
-  // 공연 정보 버튼
   const infoBtn = document.createElement('a');
   infoBtn.href = 'https://www.ticketlink.co.kr/product/58765';
   infoBtn.textContent = '공연 정보';
@@ -607,7 +614,6 @@ function renderInfo() {
   infoBtn.addEventListener('mouseenter', () => infoBtn.style.backgroundColor = '#5059c9');
   infoBtn.addEventListener('mouseleave', () => infoBtn.style.backgroundColor = '#2D3887');
 
-  // 오시는 길 버튼
   const mapBtn = document.createElement('a');
   mapBtn.href = 'https://map.naver.com/p/directions/-/14137708.3352733,4519097.9346787,두산아트센터 연강홀,13412903,PLACE_POI/-/transit?c=15.00,0,0,0,dh';
   mapBtn.textContent = '오시는 길';
@@ -624,7 +630,6 @@ function renderInfo() {
   infoWrapper.style.marginTop = '10px';
   infoWrapper.style.textAlign = 'center';
 
-  // 타이틀
   const title = document.createElement('div');
   title.textContent = '두산아트센터 연강홀';
   title.style.fontSize = '1.5rem';
@@ -632,7 +637,6 @@ function renderInfo() {
   title.style.marginBottom = '14px';
   infoWrapper.appendChild(title);
 
-  // 주소
   const addrTitle = document.createElement('div');
   addrTitle.textContent = '주소';
   addrTitle.style.fontSize = '0.95rem';
@@ -646,7 +650,6 @@ function renderInfo() {
   addr.style.marginBottom = '18px';
   infoWrapper.appendChild(addr);
 
-  // 오시는 길
   const wayTitle = document.createElement('div');
   wayTitle.textContent = '오시는 길';
   wayTitle.style.fontSize = '0.95rem';
@@ -674,7 +677,6 @@ function renderInfo() {
   park.style.marginBottom = '8px';
   infoWrapper.appendChild(park);
 
-  // 주의 안내 (작은 회색)
   const note = document.createElement('div');
   note.innerHTML = '※ 주차장이 협소하고 공연장 주변 교통이 혼잡하오니<br>가급적 대중교통을 이용해 주시기 바랍니다.';
   note.style.fontSize = '0.85rem';
@@ -684,6 +686,38 @@ function renderInfo() {
   note.style.marginTop = '8px';
   note.style.marginBottom = '10px';
   infoWrapper.appendChild(note);
+
+    // --- SNS 아이콘 영역 추가 ---
+  onst snsContainer = document.createElement('div');
+  snsContainer.style.display = 'flex';
+  snsContainer.style.gap = '24px';
+  snsContainer.style.marginTop = '24px';
+
+  const instaLink = document.createElement('a');
+  instaLink.href = 'https://www.instagram.com/yourprofile';
+  instaLink.target = '_blank';
+  instaLink.rel = 'noopener noreferrer';
+  instaLink.title = 'Instagram';
+  instaLink.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#2D3887" viewBox="0 0 24 24">
+      <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm5 .5a4.5 4.5 0 1 0 .001 9.001A4.5 4.5 0 0 0 12 4.5zm0 2a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zm3.75-.75a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </svg>
+  `;
+  snsContainer.appendChild(instaLink);
+
+  const xLink = document.createElement('a');
+  xLink.href = 'https://twitter.com/yourprofile';
+  xLink.target = '_blank';
+  xLink.rel = 'noopener noreferrer';
+  xLink.title = 'X (Twitter)';
+  xLink.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#2D3887" viewBox="0 0 24 24">
+      <path d="M23 2.998a9.12 9.12 0 0 1-2.555.7 4.474 4.474 0 0 0 1.963-2.462 9.154 9.154 0 0 1-2.906 1.109 4.536 4.536 0 0 0-7.72 3.277 4.222 4.222 0 0 0 .11 1.035A12.869 12.869 0 0 1 1.64 3.16a4.517 4.517 0 0 0-.615 2.563 4.533 4.533 0 0 0 2.02 3.78 4.485 4.485 0 0 1-2.056-.567v.059a4.55 4.55 0 0 0 3.641 4.446 4.136 4.136 0 0 1-2.05.077 4.528 4.528 0 0 0 4.226 3.165 9.09 9.09 0 0 1-5.64 1.944c-.367 0-.73-.021-1.09-.063a12.822 12.822 0 0 0 6.951 2.03c8.34 0 12.909-6.936 12.909-12.942 0-.2-.015-.406-.018-.607A9.286 9.286 0 0 0 23 2.999Z"/>
+    </svg>
+  `;
+  snsContainer.appendChild(xLink);
+
+  container.appendChild(snsContainer);
 
   container.appendChild(infoWrapper);
 
