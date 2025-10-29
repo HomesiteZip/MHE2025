@@ -158,7 +158,7 @@
     font-weight: bold;
     font-size: 1.25rem;
     color: #2D3887;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     gap: 6px;
     justify-content: center;
   }
@@ -421,11 +421,9 @@ header.className = 'person-header center';
 const img = document.createElement('img');
 img.src = person.emojiImg;  // emojiImg 필드 사용
 img.alt = person.name + ' 이모지';
-img.style.width = '38px';
-img.style.height = '38px';
-img.style.borderRadius = '50%';
+img.style.width = '36px';
 img.style.objectFit = 'cover';
-img.style.marginRight = '8px';
+img.style.marginRight = '2px';
 
 header.appendChild(img);
 
