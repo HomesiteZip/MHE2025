@@ -474,12 +474,20 @@ function createAudioPlayerWithDownload(src, label) {
 
   const downloadLink = document.createElement('a');
   downloadLink.href = src;
-  downloadLink.download = '';  // 다운로드 속성
+  downloadLink.download = '';
   downloadLink.textContent = label || '다운로드';
+  downloadLink.style.display = 'inline-flex';
+  downloadLink.style.alignItems = 'center';
   downloadLink.style.textDecoration = 'none';
   downloadLink.style.color = '#2D3887';
   downloadLink.style.fontWeight = 'bold';
   downloadLink.style.cursor = 'pointer';
+
+  downloadLink.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#2D3887" viewBox="0 0 24 24">
+      <path d="M5 20h14v-2H5v2zm7-18v12l4-4h-3V4h-2v6H8l4-4z"/>
+    </svg>
+  `;
 
   container.appendChild(audio);
   container.appendChild(downloadLink);
@@ -493,20 +501,26 @@ function renderMusic() {
   musicDiv.style.display = 'flex';
   musicDiv.style.flexDirection = 'column';
   musicDiv.style.alignItems = 'center';
-  musicDiv.style.justifyContent = 'center';
   musicDiv.style.gap = '20px';
   musicDiv.style.padding = '20px';
 
+  const icon = document.createElement('div');
+  icon.style.fontSize = '64px';
+  icon.style.color = '#ccc';
+  icon.style.marginBottom = '16px';
+  icon.textContent = '🎹';
+  
   const text = document.createElement('p');
-  text.style.color = '#888';
+  text.style.color = '#2D3887';
   text.textContent = '000 제임스의 피아노 연주';
 
+  musicDiv.appendChild(icon);
   musicDiv.appendChild(text);
 
   // 세 개의 오디오 플레이어 + 다운로드 버튼 생성
-  musicDiv.appendChild(createAudioPlayerWithDownload('https://raw.githubusercontent.com/HomesiteZip/MHE2025/main/sample1.mp3', '다운'));
-  musicDiv.appendChild(createAudioPlayerWithDownload('path/to/music2.mp3', '다운'));
-  musicDiv.appendChild(createAudioPlayerWithDownload('path/to/music3.mp3', '다운'));
+  musicDiv.appendChild(createAudioPlayerWithDownload('https://raw.githubusercontent.com/HomesiteZip/MHE2025/main/sample1.mp3', '다운로드'));
+  musicDiv.appendChild(createAudioPlayerWithDownload('path/to/music2.mp3', '다운로드'));
+  musicDiv.appendChild(createAudioPlayerWithDownload('path/to/music3.mp3', '다운로드'));
 
   return musicDiv;
 }
