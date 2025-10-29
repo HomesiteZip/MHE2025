@@ -415,10 +415,25 @@ function renderPerson(person, isLast) {
   div.className = `person ${person.name.toLowerCase()}`;
   if (person.name === 'Oliver') div.style.marginTop = '50px';
 
-  const header = document.createElement('div');
-  header.className = 'person-header center';
-  header.innerHTML = `<span class="emojiImg">${person.emojiImg}</span><span>${person.name}</span>`;
-  div.appendChild(header);
+const header = document.createElement('div');
+header.className = 'person-header center';
+
+const img = document.createElement('img');
+img.src = person.emojiImg;  // emojiImg 필드 사용
+img.alt = person.name + ' 이모지';
+img.style.width = '38px';
+img.style.height = '38px';
+img.style.borderRadius = '50%';
+img.style.objectFit = 'cover';
+img.style.marginRight = '8px';
+
+header.appendChild(img);
+
+const nameSpan = document.createElement('span');
+nameSpan.textContent = person.name;
+
+header.appendChild(nameSpan);
+div.appendChild(header);
 
   const buttonsDiv = document.createElement('div');
   buttonsDiv.className = 'buttons center';
