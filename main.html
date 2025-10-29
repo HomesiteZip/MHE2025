@@ -475,17 +475,16 @@ function createAudioPlayerWithDownload(src, label) {
   const container = document.createElement('div');
   container.style.display = 'flex';
   container.style.alignItems = 'center';
-  container.style.gap = '12px';
   container.style.width = '100%';
   container.style.maxWidth = '320px';
   container.style.marginBottom = '12px';
-  container.style.fontFamily = "'SUIT'";
+  container.style.fontFamily = "'SUIT', -apple-system, BlinkMacSystemFont, sans-serif";
 
   const audio = document.createElement('audio');
   audio.controls = true;
   audio.src = src;
   audio.style.flexGrow = '1';
-  audio.style.fontFamily = "'SUIT'";
+  audio.style.fontFamily = "'SUIT', -apple-system, BlinkMacSystemFont, sans-serif";
 
   const downloadLink = document.createElement('a');
   downloadLink.href = src;
@@ -496,7 +495,7 @@ function createAudioPlayerWithDownload(src, label) {
   downloadLink.style.cursor = 'pointer';
   downloadLink.style.textDecoration = 'none';
   downloadLink.style.fontWeight = 'bold';
-  downloadLink.style.fontFamily = "'SUIT'";
+  downloadLink.style.fontFamily = "'SUIT', -apple-system, BlinkMacSystemFont, sans-serif";
 
   const iconImg = document.createElement('img');
   iconImg.src = 'https://img.icons8.com/?size=100&id=xfmO9wVKAyAR&format=png&color=2D3887';
@@ -512,34 +511,54 @@ function createAudioPlayerWithDownload(src, label) {
 
 function renderMusic() {
   const musicDiv = document.createElement('div');
-  musicDiv.style.height = '100%';
   musicDiv.style.display = 'flex';
   musicDiv.style.flexDirection = 'column';
   musicDiv.style.alignItems = 'center';
-  musicDiv.style.gap = '20px';
+  musicDiv.style.gap = '24px';
   musicDiv.style.padding = '20px';
 
   const icon = document.createElement('div');
   icon.style.fontSize = '64px';
   icon.style.color = '#ccc';
-  icon.style.marginBottom = '16px';
+  icon.style.marginBottom = '8px';
   icon.textContent = '🎹';
-  
-  const text = document.createElement('p');
-  text.style.color = '#2D3887';
-  text.textContent = '000 제임스의 피아노 연주';
-
   musicDiv.appendChild(icon);
-  musicDiv.appendChild(text);
 
-  // 세 개의 오디오 플레이어 + 다운로드 버튼 생성
-  musicDiv.appendChild(createAudioPlayerWithDownload('https://raw.githubusercontent.com/HomesiteZip/MHE2025/main/sample1.mp3', '다운로드'));
-  musicDiv.appendChild(createAudioPlayerWithDownload('path/to/music2.mp3', '다운로드'));
-  musicDiv.appendChild(createAudioPlayerWithDownload('path/to/music3.mp3', '다운로드'));
+  const musicList = [
+    { name: '이시안 제임스', src: 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/main/sample1.mp3' },
+    { name: '고훈정 제임스', src: 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/main/sample2.mp3' },
+    { name: '박세훈 제임스', src: 'https://raw.githubusercontent.com/HomesiteZip/MHE2025/main/sample3.mp3' },
+  ];
+
+  function createPlayGroup(num, src) {
+    const group = document.createElement('div');
+    group.style.width = '100%';
+    group.style.maxWidth = '360px';
+    group.style.display = 'flex';
+    group.style.flexDirection = 'column';
+    group.style.gap = '8px';
+
+    const titleP = document.createElement('p');
+    titleP.textContent = `${title}의 피아노 연주`;
+    titleP.style.fontWeight = 'bold';
+    titleP.style.fontSize = '1.3rem';
+    titleP.style.color = '#2D3887';
+    titleP.style.margin = '0';
+
+    const player = createAudioPlayerWithDownload(src, '다운로드');
+
+    group.appendChild(titleP);
+    group.appendChild(player);
+
+    return group;
+  }
+
+  musicList.forEach(music => {
+    musicDiv.appendChild(createPlayGroup(music.name, music.src));
+  });
 
   return musicDiv;
 }
-
 
 function renderSheet() {
   const sheetDiv = document.createElement('div');
