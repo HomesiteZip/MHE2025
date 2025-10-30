@@ -649,25 +649,13 @@ function renderSheet() {
     card.style.scrollSnapAlign = 'center';
     card.style.scrollSnapStop = 'always';  
 
-     card.innerHTML = cardText;
+    card.innerHTML = cardText;
     cardScroll.appendChild(card);
   });
 
-cardScroll.addEventListener('scroll', () => {
-  const maxScrollLeft = cardScroll.scrollWidth - cardScroll.clientWidth;
-  const tolerance = 5;
-
-  if (cardScroll.scrollLeft < tolerance) {
-    cardScroll.scrollTo({ left: 0, behavior: 'smooth' });
-  } else if (cardScroll.scrollLeft > maxScrollLeft - tolerance) {
-    cardScroll.scrollTo({ left: maxScrollLeft, behavior: 'smooth' });
-  }
-});
-  
   outerDiv.appendChild(cardScroll);
   return outerDiv;
 }
-
 
 function renderInfo() {
   const container = document.createElement('div');
