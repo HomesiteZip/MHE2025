@@ -574,11 +574,12 @@ function renderSheet() {
 
  // 타이틀 영역 (상단 고정)
   const titleDiv = document.createElement('div');
-  titleDiv.textContent = '요새 듣고 있는 <strong>행복해지는 음악</strong>은 무엇인가요?<br>그리고 <어쩌면 해피엔딩>에서 가장 좋아하는 대사는?';  // 원하는 타이틀 텍스트
+  titleDiv.innerHTML = '요새 듣고 있는 <strong>행복해지는 음악</strong>은 무엇인가요?<br>그리고 <어쩌면 해피엔딩>에서 가장 좋아하는 대사는?';  // 원하는 타이틀 텍스트
   titleDiv.style.fontWeight = 'bold';
-  titleDiv.style.fontSize = '1.5rem';
+  titleDiv.style.fontSize = '0.9rem';
   titleDiv.style.color = '#2D3887';
-  titleDiv.style.margin = '20px 0';
+  titleDiv.style.margin = '20px 20px';
+  titleDiv.style.textAlign = 'center';
   // 필요하면 position sticky로 고정 가능 (예시)
   // titleDiv.style.position = 'sticky';
   // titleDiv.style.top = '0';
