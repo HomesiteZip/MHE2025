@@ -572,12 +572,12 @@ function renderSheet() {
   cardScroll.style.height = '100%';
   cardScroll.style.width = '100%';
   cardScroll.style.gap = '28px';
-  cardScroll.style.padding = '30px 0 16px 0';
+  cardScroll.style.padding = '60px 10px 16px 0';
   cardScroll.style.scrollSnapType = 'x mandatory';
 
   // 줄글 내용을 카드 배열로 파싱 (기준: '배우' 텍스트)
   const rawContent = `
-<strong>김재범 배우</strong><br>저는 늘 다음에 할 공연 노래를 들어요~<br>지금은 당연히 어쩌면 해피엔딩 노래를 듣고 있지요~ 듣고 있으면 행복하고 슬프고 감동적입니다~<br>가장 좋아하는 대사는 사실 너무나 많은데 지금은 “내 문을 두드려 줘서 고마웠어” 입니다.<br><br>
+<strong>"<br>김재범 배우</strong><br>저는 늘 다음에 할 공연 노래를 들어요~<br>지금은 당연히 어쩌면 해피엔딩 노래를 듣고 있지요~ 듣고 있으면 행복하고 슬프고 감동적입니다~<br>가장 좋아하는 대사는 사실 너무나 많은데 지금은 “내 문을 두드려 줘서 고마웠어” 입니다.<br><br>
 <strong>신성민 배우</strong><br>aaaaaaaa글내용aaaaaaaa글내용aaaa<br>aaaaaaaa글내용aaaaaaaa<br><br>
 <strong>전성우 배우</strong><br>aaaaaaaa글내용aaaaaaaa글내용aaaa<br>aaaaaaaa글내용aaaaaaaa<br><br>
 <strong>정휘 배우</strong><br>이찬혁_비비드라라러브<br>신나는 노래와 무대앙상블이 너무좋고 가사들으면 위로받는 느낌입니다.<br>고맙습니다! 천만에요!!<br><br>
@@ -599,18 +599,20 @@ function renderSheet() {
     const card = document.createElement('div');
     card.style.minWidth = '280px';
     card.style.maxWidth = '320px';
+    card.style.height = '500px';
     card.style.flex = '0 0 88vw';
     card.style.background = '#fff';
     card.style.borderRadius = '22px';
     card.style.boxShadow = '0 4px 18px rgba(0,0,0,0.07)';
-    card.style.padding = '18px 20px';      // 상하 사이즈 줄임 (기존 32px → 18px)
+    card.style.padding = '20px 25px';
     card.style.boxSizing = 'border-box';
     card.style.textAlign = 'left';
     card.style.color = '#222';
-    card.style.fontSize = '1.05rem';
-    card.style.lineHeight = '1.6';         // 조금 더 촘촘하게
+    card.style.fontSize = '1.1rem';
+    card.style.lineHeight = '1.7'; 
     card.style.margin = '0';
     card.style.scrollSnapAlign = 'center';
+    card.style.scrollSnapStop = 'always';  
 
     card.innerHTML = cardText;
     cardScroll.appendChild(card);
