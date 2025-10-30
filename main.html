@@ -6,6 +6,9 @@
 <meta name="robots" content="noindex, nofollow" />
 <title>MAYBE HAPPY ENDING</title>
 <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.1/netmarbleB.woff" rel="stylesheet">
+  
 <style>
   body, html {
     margin: 0; padding: 0; height: 100%;
@@ -132,6 +135,7 @@
     padding: 10px;
   }
   .home-text {
+    font-family: 'SUIT', sans-serif;
     color: #2D3887;
     font-size: 0.95rem;
     font-weight: 500;
@@ -520,7 +524,6 @@ function renderMusic() {
 
   const icon = document.createElement('div');
   icon.style.fontSize = '64px';
-  icon.style.color = '#ccc';
   icon.style.marginBottom = '8px';
   icon.textContent = '🎹';
   musicDiv.appendChild(icon);
@@ -541,6 +544,7 @@ function renderMusic() {
 
     const titleP = document.createElement('p');
     titleP.textContent = `${name}의 피아노 연주`;
+    titleP.style.fontFamily = "'SUIT', sans-serif";
     titleP.style.fontWeight = 'bold';
     titleP.style.fontSize = '1.1rem';
     titleP.style.color = '#2D3887';
@@ -575,6 +579,7 @@ function renderSheet() {
  // 타이틀 영역 (상단 고정)
   const titleDiv = document.createElement('div');
   titleDiv.innerHTML = '<br>요새 듣고 있는 <strong>행복해지는 음악</strong>은 무엇인가요?<br>그리고 <어쩌면 해피엔딩>에서 가장 좋아하는 대사는?';
+  titleDiv.style.fontFamily = "'SUIT', sans-serif";
   titleDiv.style.fontWeight = 'bold';
   titleDiv.style.fontSize = '0.9rem';
   titleDiv.style.color = '#2D3887';
@@ -593,8 +598,7 @@ function renderSheet() {
   cardScroll.style.scrollSnapType = 'x mandatory';
 
   const rawContent = `
-  <img src="https://img.icons8.com/?size=100&id=38968&format=png&color=2D3887" alt="큰따옴표" style="width:20px; vertical-align:middle; margin-right:8px;" />
-<strong>"<br>김재범 배우</strong><br>저는 늘 다음에 할 공연 노래를 들어요~<br>지금은 당연히 어쩌면 해피엔딩 노래를 듣고 있지요~ 듣고 있으면 행복하고 슬프고 감동적입니다~<br>가장 좋아하는 대사는 사실 너무나 많은데 지금은 “내 문을 두드려 줘서 고마웠어” 입니다.<br><br>
+<span style="font-family: Netmarble, sans-serif; font-size: 2rem; color:#2D3887;">"</span><strong><br>김재범 배우</strong><br>저는 늘 다음에 할 공연 노래를 들어요~<br>지금은 당연히 어쩌면 해피엔딩 노래를 듣고 있지요~ 듣고 있으면 행복하고 슬프고 감동적입니다~<br>가장 좋아하는 대사는 사실 너무나 많은데 지금은 “내 문을 두드려 줘서 고마웠어” 입니다.<br><br>
 <strong>"<br>신성민 배우</strong><br>Colonna Sonora - Forrest gump<br>제가 좋아하는 명작 중 하나인데, 이 노래를 듣고 있으면 힐링이 되고 복잡했던 마음이 깨끗해져요. 삶의 소소한 행복을 찾아 길을 나서게 해주는 듯한 힘을 줍니다.<br><br>
 <strong>"<br>전성우 배우</strong><br>aaaaaaaa글내용aaaaaaaa글내용aaaa<br>aaaaaaaa글내용aaaaaaaa<br><br>
 <strong>"<br>정휘 배우</strong><br>이찬혁 - 비비드라라러브<br>신나는 노래와 무대앙상블이 너무좋고 가사들으면 위로받는 느낌입니다.<br>고맙습니다! 천만에요!!<br><br>
