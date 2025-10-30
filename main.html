@@ -595,12 +595,10 @@ function renderSheet() {
   titleDiv.style.fontWeight = 'bold';
   titleDiv.style.fontSize = '0.9rem';
   titleDiv.style.color = '#2D3887';
-  titleDiv.style.margin = '20px 20px';
-  titleDiv.style.textAlign = 'center';
+  titleDiv.style.margin = '20px 0';
   titleDiv.style.position = 'sticky';
   titleDiv.style.top = '0';
   titleDiv.style.zIndex = '10';
-
   outerDiv.appendChild(titleDiv);
   
   const cardScroll = document.createElement('div');
@@ -610,12 +608,9 @@ function renderSheet() {
   cardScroll.style.width = '90vw';
   cardScroll.style.maxWidth = '430px';
   cardScroll.style.gap = '28px';
-  cardScroll.style.padding = '0px 16px 16px 16px';
+  cardScroll.style.padding = '0px 16px 16px 24px';
   cardScroll.style.margin = '0 auto';
   cardScroll.style.scrollSnapType = 'x mandatory';
-  cardScroll.style.scrollPaddingLeft = '20px';
-  cardScroll.style.scrollPaddingRight = '20px';
-
 
   const rawContent = `
 <img src="https://img.icons8.com/fluency-systems-filled/24/2D3887/quote-left.png" alt="따옴표" style="width:24px; height:24px; vertical-align:middle; margin-left:8px;"><strong>"<br>김재범 배우</strong><br>저는 늘 다음에 할 공연 노래를 들어요~<br>지금은 당연히 어쩌면 해피엔딩 노래를 듣고 있지요~ 듣고 있으면 행복하고 슬프고 감동적입니다~<br><br>가장 좋아하는 대사는 사실 너무나 많은데 지금은 “내 문을 두드려 줘서 고마웠어” 입니다.<br><br><span style="display: inline-block; text-align: right; width: 100%; font-size: 0.8rem; color:#666;">옆으로 스와이프 해주세요 → </span><br><br>
@@ -668,8 +663,6 @@ cardScroll.addEventListener('scroll', () => {
     cardScroll.scrollTo({ left: maxScrollLeft, behavior: 'smooth' });
   }
 });
-
-
   
   outerDiv.appendChild(cardScroll);
   return outerDiv;
