@@ -565,14 +565,35 @@ function renderMusic() {
 
   // 배우 텍스트  
 function renderSheet() {
-  // 전체 카드 컨테이너 (가로 스크롤)
+  const outerDiv = document.createElement('div');
+  outerDiv.style.width = '100%';
+  outerDiv.style.height = '100%';
+  outerDiv.style.display = 'flex';
+  outerDiv.style.flexDirection = 'column';
+  outerDiv.style.alignItems = 'center';
+
+ // 타이틀 영역 (상단 고정)
+  const titleDiv = document.createElement('div');
+  titleDiv.textContent = '요새 듣고 있는 '행복해지는 음악'은 무엇인가요?<br>그리고 <어쩌면 해피엔딩>에서 가장 좋아하는 대사는?';  // 원하는 타이틀 텍스트
+  titleDiv.style.fontWeight = 'bold';
+  titleDiv.style.fontSize = '1.5rem';
+  titleDiv.style.color = '#2D3887';
+  titleDiv.style.margin = '20px 0';
+  // 필요하면 position sticky로 고정 가능 (예시)
+  // titleDiv.style.position = 'sticky';
+  // titleDiv.style.top = '0';
+  // titleDiv.style.backgroundColor = '#fff';
+  // titleDiv.style.zIndex = '10';
+  outerDiv.appendChild(titleDiv);
+  
   const cardScroll = document.createElement('div');
   cardScroll.style.display = 'flex';
   cardScroll.style.overflowX = 'auto';
-  cardScroll.style.height = '100%';
-  cardScroll.style.width = '100%';
+  cardScroll.style.height = '87vh';
+  cardScroll.style.width = '90vw';
+  cardScroll.style.maxWidth = '430px';
   cardScroll.style.gap = '28px';
-  cardScroll.style.padding = '60px 0 16px 12px';
+  cardScroll.style.padding = '0px 0 16px 12px';
   cardScroll.style.scrollSnapType = 'x mandatory';
 
   const rawContent = `
@@ -589,16 +610,13 @@ function renderSheet() {
 <strong><br>"<br>고훈정 배우</strong><br>Nat "King” Cole - ‘Tis Autumn<br>지금 이 계절과 아주 어울려요.<br>“너희 꽤 똑똑하잖아 괜찮을거야” - 노인 우편배달부<br><br>
 <strong><br>"<br>박세훈 배우</strong><br>H.O.T - 행복<br>노래 자체도 너무 행복하고 밝지만, 제가 초등학생 또는 중학생 때라 학창시절의 추억이 떠올리게 하는 노래 입니다.<br>클레어의 "그건 기억해도 돼." 라는 대사 정말 좋아해요. 이유는...공연을 보시면 알게 되실겁니다^^<br><br>
 `;
-
-   // 카드별로 분리
-  // 맨 첫 부분은 빈 문자열이므로 .slice(1)로 처리
+  
   const cardContents = rawContent.split('<strong>').slice(1).map(txt => '<strong>' + txt.trim());
 
   cardContents.forEach(cardText => {
     const card = document.createElement('div');
     card.style.minWidth = '280px';
     card.style.maxWidth = '320px';
-    card.style.height = '450px';
     card.style.flex = '0 0 88vw';
     card.style.background = '#fff';
     card.style.borderRadius = '22px';
@@ -613,34 +631,13 @@ function renderSheet() {
     card.style.scrollSnapAlign = 'center';
     card.style.scrollSnapStop = 'always';  
 
-    const titleDiv = document.createElement('div');
-    titleDiv.textContent = "요새 듣고 있는 '행복해지는 음악'은 무엇인가요?<br>그리고 <어쩌면 해피엔딩>에서 가장 좋아하는 대사는?";
-    titleDiv.style.fontWeight = 'bold';
-    titleDiv.style.fontSize = '0.9rem';
-    titleDiv.style.marginBottom = '12px';
-    titleDiv.style.color = '#2D3887';
-
-    card.appendChild(titleDiv);
-
-    const contentDiv = document.createElement('div');
-    contentDiv.innerHTML = cardText;
-    card.appendChild(contentDiv);
-
+     card.innerHTML = cardText;
     cardScroll.appendChild(card);
   });
 
-  // 바깥 div로 감싸서 가운데 정렬
-  const outerDiv = document.createElement('div');
-  outerDiv.style.width = '100%';
-  outerDiv.style.height = '100%';
-  outerDiv.style.display = 'flex';
-  outerDiv.style.justifyContent = 'center';
-  outerDiv.style.alignItems = 'center';
   outerDiv.appendChild(cardScroll);
-
   return outerDiv;
 }
-
 
 
 function renderInfo() {
