@@ -591,10 +591,12 @@ function renderSheet() {
   outerDiv.style.display = 'flex';
   outerDiv.style.flexDirection = 'column';
   outerDiv.style.alignItems = 'center';
+  outerDiv.style.justifyContent = 'center';
 
  // 타이틀 영역 (상단 고정)
   const titleDiv = document.createElement('div');
   titleDiv.innerHTML = '<br>요새 듣고 있는 <strong>행복해지는 음악</strong>은 무엇인가요?<br>그리고 <어쩌면 해피엔딩>에서 가장 좋아하는 대사는?';
+  titleDiv.style.width = '100%';
   titleDiv.style.fontFamily = "'SUIT', sans-serif";
   titleDiv.style.fontWeight = 'bold';
   titleDiv.style.fontSize = '0.9rem';
@@ -615,7 +617,11 @@ function renderSheet() {
   cardScroll.style.maxWidth = '430px';
   cardScroll.style.gap = '28px';
   cardScroll.style.padding = '0px 50px 16px 50px';
+  cardScroll.style.margin = '0 auto';
   cardScroll.style.scrollSnapType = 'x mandatory';
+  cardScroll.style.scrollPaddingLeft = '50px';
+  cardScroll.style.scrollPaddingRight = '50px';
+
 
   const rawContent = `
 <strong>"<br>김재범 배우</strong><br>저는 늘 다음에 할 공연 노래를 들어요~<br>지금은 당연히 어쩌면 해피엔딩 노래를 듣고 있지요~ 듣고 있으면 행복하고 슬프고 감동적입니다~<br><br>가장 좋아하는 대사는 사실 너무나 많은데 지금은 “내 문을 두드려 줘서 고마웠어” 입니다.<br><br><span style="display: inline-block; text-align: right; width: 100%; font-size: 0.8rem; color:#666;">옆으로 스와이프 해주세요 → </span><br><br>
@@ -638,8 +644,8 @@ function renderSheet() {
     const card = document.createElement('div');
     card.style.minWidth = '280px';
     card.style.maxWidth = '320px';
-    card.style.minheight = '450px';
-    card.style.maxheight = '550px';
+    card.style.minHeight = '450px';
+    card.style.maxHeight = '550px';
     card.style.flex = '0 0 88vw';
     card.style.background = '#fff';
     card.style.borderRadius = '22px';
@@ -660,16 +666,15 @@ function renderSheet() {
 
 cardScroll.addEventListener('scroll', () => {
   const maxScrollLeft = cardScroll.scrollWidth - cardScroll.clientWidth;
-  const tolerance = 5;  // 오차 허용 범위
+  const tolerance = 5;
 
   if (cardScroll.scrollLeft < tolerance) {
-    // 맨 처음 구간 정렬 강제 맞춤
     cardScroll.scrollTo({ left: 0, behavior: 'smooth' });
   } else if (cardScroll.scrollLeft > maxScrollLeft - tolerance) {
-    // 맨 끝 구간 정렬 강제 맞춤
     cardScroll.scrollTo({ left: maxScrollLeft, behavior: 'smooth' });
   }
 });
+
 
   
   outerDiv.appendChild(cardScroll);
