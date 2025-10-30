@@ -6,7 +6,8 @@
 <meta name="robots" content="noindex, nofollow" />
 <title>MAYBE HAPPY ENDING</title>
 <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
-<style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.1/netmarbleB.woff">
+  <style>
   body, html {
     margin: 0; padding: 0; height: 100%;
     background-color: #fadbdf;
@@ -271,17 +272,10 @@
       <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM7 9l2.5 3.01L12.5 9l4.5 6H5l2-3z"/></svg>
     </button>
     <button id="tab-music-btn" aria-label="피아노">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24">
-  <rect x="2" y="6" width="20" height="12" rx="2" ry="2" />
-  <line x1="6" y1="6" x2="6" y2="18" />
-  <line x1="10" y1="6" x2="10" y2="18" />
-  <line x1="14" y1="6" x2="14" y2="18" />
-  <line x1="18" y1="6" x2="18" y2="18" />
-  <path d="M2 12h20" />
-</svg>
+      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
     </button>
     <button id="tab-sheet-btn" aria-label="음악">
-      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+      <img width="48" height="48" src="https://img.icons8.com/fluency-systems-filled/48/smart-playlist.png" alt="smart-playlist"/>
     </button>
     <button id="tab-info-btn" aria-label="정보">
       <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg>
@@ -614,7 +608,7 @@ function renderSheet() {
   cardScroll.style.scrollSnapType = 'x mandatory';
 
   const rawContent = `
-<span style="font-family: Netmarble, sans-serif; font-size: 2rem; color:#2D3887;">"따옴표 표시"</span><strong><br>김재범 배우</strong><br>저는 늘 다음에 할 공연 노래를 들어요~<br>지금은 당연히 어쩌면 해피엔딩 노래를 듣고 있지요~ 듣고 있으면 행복하고 슬프고 감동적입니다~<br>가장 좋아하는 대사는 사실 너무나 많은데 지금은 “내 문을 두드려 줘서 고마웠어” 입니다.<br><br>
+<span style="font-family: Netmarble, sans-serif; font-size: 2rem; color:#2D3887;">"따옴표 표시"<br></span><strong>김재범 배우</strong><br>저는 늘 다음에 할 공연 노래를 들어요~<br>지금은 당연히 어쩌면 해피엔딩 노래를 듣고 있지요~ 듣고 있으면 행복하고 슬프고 감동적입니다~<br>가장 좋아하는 대사는 사실 너무나 많은데 지금은 “내 문을 두드려 줘서 고마웠어” 입니다.<br><br>
 <strong>"<br>신성민 배우</strong><br>Colonna Sonora - Forrest gump<br>제가 좋아하는 명작 중 하나인데, 이 노래를 듣고 있으면 힐링이 되고 복잡했던 마음이 깨끗해져요. 삶의 소소한 행복을 찾아 길을 나서게 해주는 듯한 힘을 줍니다.<br><br>
 <strong>"<br>전성우 배우</strong><br>aaaaaaaa글내용aaaaaaaa글내용aaaa<br>aaaaaaaa글내용aaaaaaaa<br><br>
 <strong>"<br>정휘 배우</strong><br>이찬혁 - 비비드라라러브<br>신나는 노래와 무대앙상블이 너무좋고 가사들으면 위로받는 느낌입니다.<br>고맙습니다! 천만에요!!<br><br>
