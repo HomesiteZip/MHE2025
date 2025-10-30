@@ -590,7 +590,6 @@ function renderSheet() {
  // 타이틀 영역 (상단 고정)
   const titleDiv = document.createElement('div');
   titleDiv.innerHTML = '<br>요새 듣고 있는 <strong>행복해지는 음악</strong>은 무엇인가요?<br>그리고 <어쩌면 해피엔딩>에서 가장 좋아하는 대사는?';
-  titleDiv.style.width = '100%';
   titleDiv.style.fontFamily = "'SUIT', sans-serif";
   titleDiv.style.fontWeight = 'bold';
   titleDiv.style.fontSize = '0.9rem';
@@ -608,8 +607,7 @@ function renderSheet() {
   cardScroll.style.width = '90vw';
   cardScroll.style.maxWidth = '430px';
   cardScroll.style.gap = '28px';
-  cardScroll.style.padding = '0px 16px 16px 24px';
-  cardScroll.style.margin = '0 auto';
+  cardScroll.style.padding = '0px 12px 12px 12px';
   cardScroll.style.scrollSnapType = 'x mandatory';
 
   const rawContent = `
