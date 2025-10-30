@@ -602,6 +602,10 @@ function renderSheet() {
   titleDiv.style.color = '#2D3887';
   titleDiv.style.margin = '20px 20px';
   titleDiv.style.textAlign = 'center';
+  titleDiv.style.position = 'sticky';
+  titleDiv.style.top = '0';
+  titleDiv.style.zIndex = '10';
+
   outerDiv.appendChild(titleDiv);
   
   const cardScroll = document.createElement('div');
@@ -611,7 +615,7 @@ function renderSheet() {
   cardScroll.style.width = '90vw';
   cardScroll.style.maxWidth = '430px';
   cardScroll.style.gap = '28px';
-  cardScroll.style.padding = '0px 0 16px 50px';
+  cardScroll.style.padding = '0px 50px 16px 50px';
   cardScroll.style.scrollSnapType = 'x mandatory';
 
   const rawContent = `
@@ -655,6 +659,20 @@ function renderSheet() {
     cardScroll.appendChild(card);
   });
 
+cardScroll.addEventListener('scroll', () => {
+  const maxScrollLeft = cardScroll.scrollWidth - cardScroll.clientWidth;
+  const tolerance = 5;  // 오차 허용 범위
+
+  if (cardScroll.scrollLeft < tolerance) {
+    // 맨 처음 구간 정렬 강제 맞춤
+    cardScroll.scrollTo({ left: 0, behavior: 'smooth' });
+  } else if (cardScroll.scrollLeft > maxScrollLeft - tolerance) {
+    // 맨 끝 구간 정렬 강제 맞춤
+    cardScroll.scrollTo({ left: maxScrollLeft, behavior: 'smooth' });
+  }
+});
+
+  
   outerDiv.appendChild(cardScroll);
   return outerDiv;
 }
