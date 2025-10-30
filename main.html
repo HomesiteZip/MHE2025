@@ -591,7 +591,7 @@ function renderSheet() {
   outerDiv.style.display = 'flex';
   outerDiv.style.flexDirection = 'column';
   outerDiv.style.alignItems = 'center';
-  outerDiv.style.justifyContent = 'center';
+   outerDiv.style.position = 'relative'; 
 
  // 타이틀 영역 (상단 고정)
   const titleDiv = document.createElement('div');
@@ -601,6 +601,7 @@ function renderSheet() {
   titleDiv.style.fontWeight = 'bold';
   titleDiv.style.fontSize = '0.9rem';
   titleDiv.style.color = '#2D3887';
+  titleDiv.style.position = 'fixed';  
   titleDiv.style.margin = '20px 0';
   titleDiv.style.position = 'sticky';
   titleDiv.style.top = '0';
@@ -639,7 +640,7 @@ function renderSheet() {
     card.style.minWidth = '280px';
     card.style.maxWidth = '320px';
     card.style.minHeight = '450px';
-    card.style.maxHeight = '550px';
+    card.style.maxHeight = '600px';
     card.style.flex = '0 0 88vw';
     card.style.background = '#fff';
     card.style.borderRadius = '22px';
